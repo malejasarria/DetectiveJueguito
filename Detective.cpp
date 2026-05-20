@@ -135,7 +135,9 @@ void Detective::interrogarTestigo() {
     if (testigos.empty()) {
 
         cout << endl;
+
         cout << "No hay testigos en la cola." << endl;
+
         return;
     }
 
@@ -148,4 +150,31 @@ void Detective::interrogarTestigo() {
     cout << actual.getDeclaracion() << endl;
 
     testigos.pop();
+}
+
+void Detective::agregarSospechoso(Sospechoso sospechoso) {
+
+    sospechosos[sospechoso.getNombre()] = sospechoso;
+}
+
+void Detective::mostrarSospechosos() {
+
+    cout << endl;
+
+    cout << "Lista de sospechosos:" << endl;
+
+    for (auto& par : sospechosos) {
+
+        cout << endl;
+
+        cout << "Nombre: "
+             << par.second.getNombre()
+             << endl;
+
+        cout << "Crimen: "
+             << par.second.getCrimen()
+             << endl;
+    }
+
+    cout << endl;
 }

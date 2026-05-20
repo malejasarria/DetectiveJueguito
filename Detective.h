@@ -4,10 +4,12 @@
 #include "Nodo.h"
 #include "Pista.h"
 #include "Testigo.h"
+#include "Sospechoso.h"
 
 #include <string>
 #include <stack>
 #include <queue>
+#include <unordered_map>
 
 using namespace std;
 
@@ -24,6 +26,8 @@ private:
     stack<Pista> pistas;
 
     queue<Testigo> testigos;
+
+    unordered_map<string, Sospechoso> sospechosos;
 
 public:
 
@@ -56,6 +60,10 @@ public:
     void agregarTestigo(Testigo testigo);
 
     void interrogarTestigo();
+
+    void agregarSospechoso(Sospechoso sospechoso);
+
+    void mostrarSospechosos();
 
 };
 

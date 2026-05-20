@@ -20,6 +20,15 @@ int main() {
 
     Detective detective(nombre);
 
+    detective.agregarSospechoso(
+            Sospechoso("Carlos", "Robo"));
+
+    detective.agregarSospechoso(
+            Sospechoso("Ana", "Fraude"));
+
+    detective.agregarSospechoso(
+            Sospechoso("Miguel", "Asesinato"));
+
     Nodo* inicioDetective = mapa.obtenerNodoAleatorio();
 
     while (inicioDetective->bloqueado ||
@@ -52,6 +61,7 @@ int main() {
         cout << "D = Derecha" << endl;
         cout << "T = Ver pistas" << endl;
         cout << "I = Interrogar testigo" << endl;
+        cout << "M = Mostrar sospechosos" << endl;
         cout << "Q = Salir" << endl;
 
         cin >> movimiento;
@@ -83,19 +93,25 @@ int main() {
             case 'I':
                 detective.interrogarTestigo();
                 break;
+
+            case 'M':
+                detective.mostrarSospechosos();
+                break;
         }
 
         detective.revisarPista();
 
         if (detective.getPosicion()->tieneTestigo) {
 
-            Testigo nuevo("Vi algo sospechoso cerca del callejon.");
+            Testigo nuevo(
+                    "Vi algo sospechoso cerca del callejon.");
 
             detective.agregarTestigo(nuevo);
 
             cout << endl;
 
-            cout << "Un testigo fue agregado a la cola." << endl;
+            cout << "Un testigo fue agregado a la cola."
+                 << endl;
 
             detective.getPosicion()->tieneTestigo = false;
 
