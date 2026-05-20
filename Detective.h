@@ -31,6 +31,14 @@ private:
 
     Sospechoso culpableReal;
 
+    bool cabelloDescubierto;
+
+    bool pielDescubierta;
+
+    bool sexoDescubierto;
+
+    bool estaturaDescubierta;
+
 public:
 
     Detective(string nom);

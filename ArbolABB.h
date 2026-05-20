@@ -3,6 +3,10 @@
 
 #include "NodoABB.h"
 
+#include <string>
+
+using namespace std;
+
 class ArbolABB {
 
 private:
@@ -23,6 +27,9 @@ public:
     void insertar(Score dato);
 
     void mostrarInorder();
+
+    bool buscarDetective(
+            string nombre);
 };
 
 #endif

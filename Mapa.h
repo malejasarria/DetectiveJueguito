@@ -16,18 +16,14 @@ public:
 
     void crearMapa();
 
-    void conectarNodos(Nodo* nodos[9][9]);
+    void imprimirMapa(
+            Detective detective);
 
-    void imprimirMapa(Detective& detective);
+    Nodo* obtenerInicio();
 
     Nodo* obtenerNodoAleatorio();
 
-    void generarCallejones();
-
-    void generarPistas();
-
-    void generarTestigos();
-
+    void abrirCalles();
 };
 
 #endif

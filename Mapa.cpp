@@ -7,189 +7,235 @@ using namespace std;
 
 Mapa::Mapa() {
 
-    inicio = nullptr;
-
     crearMapa();
-
-    generarCallejones();
-
-    generarPistas();
-
-    generarTestigos();
 }
 
 void Mapa::crearMapa() {
 
-    Nodo* filaAnterior = nullptr;
+    inicio = nullptr;
 
-    for (int i = 0; i < 9; i++) {
+    Nodo* filaAnteriorInicio = nullptr;
 
-        Nodo* filaActual = nullptr;
-        Nodo* anterior = nullptr;
+    Nodo* filaActualInicio = nullptr;
 
-        Nodo* arriba = filaAnterior;
+    for (int i = 0; i < 10; i++) {
 
-        for (int j = 0; j < 9; j++) {
+        Nodo* actual = nullptr;
+
+        Nodo* izquierda = nullptr;
+
+        Nodo* arriba = filaAnteriorInicio;
+
+        for (int j = 0; j < 10; j++) {
 
             Nodo* nuevo = new Nodo(i, j);
 
-            if (inicio == nullptr) {
+            if (j == 0) {
 
-                inicio = nuevo;
+                filaActualInicio = nuevo;
+
+                if (inicio == nullptr) {
+
+                    inicio = nuevo;
+                }
             }
 
-            if (filaActual == nullptr) {
+            if (izquierda != nullptr) {
 
-                filaActual = nuevo;
-            }
+                izquierda->derecha = nuevo;
 
-            if (anterior != nullptr) {
-
-                anterior->derecha = nuevo;
-                nuevo->izquierda = anterior;
+                nuevo->izquierda = izquierda;
             }
 
             if (arriba != nullptr) {
 
                 nuevo->arriba = arriba;
+
                 arriba->abajo = nuevo;
 
                 arriba = arriba->derecha;
             }
 
-            anterior = nuevo;
+            izquierda = nuevo;
+
+            actual = nuevo;
         }
 
-        filaAnterior = filaActual;
+        filaAnteriorInicio = filaActualInicio;
     }
-}
 
-void Mapa::conectarNodos(Nodo* nodos[9][9]) {
+    int pistas = 0;
 
-}
+    while (pistas < 10) {
 
-void Mapa::generarCallejones() {
-
-    int cantidad = 0;
-
-    while (cantidad < 16) {
-
-        Nodo* actual = obtenerNodoAleatorio();
+        Nodo* actual =
+                obtenerNodoAleatorio();
 
         if (actual->contenido == 'o') {
 
-            actual->contenido = '|';
+            char tipos[4] =
+                    {'H', 'C', 'T', 'P'};
 
-            actual->bloqueado = true;
+            char tipo =
+                    tipos[rand() % 4];
 
-            cantidad++;
+            actual->contenido =
+                    tipo;
+
+            actual->tienePista =
+                    true;
+
+            actual->tipoPista =
+                    tipo;
+
+            pistas++;
         }
     }
-}
 
-void Mapa::generarPistas() {
+    int bloqueos = 0;
 
-    int cantidad = 0;
+    while (bloqueos < 20) {
 
-    char tipos[4] = {'H', 'C', 'T', 'P'};
-
-    while (cantidad < 10) {
-
-        Nodo* actual = obtenerNodoAleatorio();
+        Nodo* actual =
+                obtenerNodoAleatorio();
 
         if (actual->contenido == 'o') {
 
-            int tipoAleatorio = rand() % 4;
+            actual->contenido =
+                    '|';
 
-            actual->contenido = tipos[tipoAleatorio];
+            actual->bloqueado =
+                    true;
 
-            actual->tienePista = true;
-
-            actual->tipoPista = tipos[tipoAleatorio];
-
-            cantidad++;
+            bloqueos++;
         }
     }
-}
 
-void Mapa::generarTestigos() {
+    int testigos = 0;
 
-    int cantidad = 0;
+    while (testigos < 5) {
 
-    while (cantidad < 5) {
-
-        Nodo* actual = obtenerNodoAleatorio();
+        Nodo* actual =
+                obtenerNodoAleatorio();
 
         if (actual->contenido == 'o') {
 
-            actual->contenido = 'W';
+            actual->contenido =
+                    'W';
 
-            actual->tieneTestigo = true;
+            actual->tieneTestigo =
+                    true;
 
-            cantidad++;
+            testigos++;
         }
     }
 }
 
-void Mapa::imprimirMapa(Detective& detective) {
+void Mapa::imprimirMapa(
+        Detective detective) {
 
-    Nodo* fila = inicio;
+    Nodo* filaActual = inicio;
 
     cout << endl;
 
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < 12; i++) {
 
-        for (int j = 0; j < 11; j++) {
+        cout << "# ";
+    }
 
-            if (i == 0 || i == 10 || j == 0 || j == 10) {
+    cout << endl;
 
-                cout << "# ";
+    for (int i = 0; i < 10; i++) {
+
+        cout << "# ";
+
+        Nodo* columnaActual =
+                filaActual;
+
+        for (int j = 0; j < 10; j++) {
+
+            if (columnaActual ==
+                detective.getPosicion()) {
+
+                cout << "D ";
 
             } else {
 
-                Nodo* actual = fila;
-
-                for (int k = 1; k < j; k++) {
-
-                    actual = actual->derecha;
-                }
-
-                if (actual == detective.getPosicion()) {
-
-                    cout << "D ";
-
-                } else {
-
-                    cout << actual->contenido << " ";
-                }
+                cout << columnaActual->contenido
+                     << " ";
             }
+
+            columnaActual =
+                    columnaActual->derecha;
         }
 
-        cout << endl;
+        cout << "#" << endl;
 
-        if (i > 0 && i < 10) {
-
-            fila = fila->abajo;
-        }
+        filaActual =
+                filaActual->abajo;
     }
+
+    for (int i = 0; i < 12; i++) {
+
+        cout << "# ";
+    }
+
+    cout << endl;
+}
+
+Nodo* Mapa::obtenerInicio() {
+
+    return inicio;
 }
 
 Nodo* Mapa::obtenerNodoAleatorio() {
 
-    int filaRandom = rand() % 9;
-    int columnaRandom = rand() % 9;
-
     Nodo* actual = inicio;
 
-    for (int i = 0; i < filaRandom; i++) {
+    int fila =
+            rand() % 10;
 
-        actual = actual->abajo;
+    int columna =
+            rand() % 10;
+
+    for (int i = 0; i < fila; i++) {
+
+        actual =
+                actual->abajo;
     }
 
-    for (int j = 0; j < columnaRandom; j++) {
+    for (int j = 0; j < columna; j++) {
 
-        actual = actual->derecha;
+        actual =
+                actual->derecha;
     }
 
     return actual;
+}
+
+void Mapa::abrirCalles() {
+
+    int abiertas = 0;
+
+    while (abiertas < 2) {
+
+        Nodo* actual =
+                obtenerNodoAleatorio();
+
+        if (actual->bloqueado) {
+
+            actual->bloqueado =
+                    false;
+
+            actual->contenido =
+                    'o';
+
+            abiertas++;
+        }
+    }
+
+    cout << endl;
+
+    cout << "Dos callejones fueron abiertos."
+         << endl;
 }

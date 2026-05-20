@@ -12,6 +12,14 @@ Detective::Detective(string nom) {
     puntaje = 0;
 
     posicionActual = nullptr;
+
+    cabelloDescubierto = false;
+
+    pielDescubierta = false;
+
+    sexoDescubierto = false;
+
+    estaturaDescubierta = false;
 }
 
 void Detective::setPosicion(Nodo* nodo) {
@@ -162,6 +170,8 @@ char Detective::usarPista() {
                  << culpableReal.getCabello()
                  << "." << endl;
 
+            cabelloDescubierto = true;
+
             cout << "Tu puntaje fue reducido a la mitad."
                  << endl;
 
@@ -176,6 +186,8 @@ char Detective::usarPista() {
                  << culpableReal.getPiel()
                  << "." << endl;
 
+            pielDescubierta = true;
+
             break;
 
         case 'T': {
@@ -186,6 +198,8 @@ char Detective::usarPista() {
             cout << "El culpable es de estatura "
                  << culpableReal.getEstatura()
                  << "." << endl;
+
+            estaturaDescubierta = true;
 
             int evento;
 
@@ -217,6 +231,8 @@ char Detective::usarPista() {
             cout << "El culpable es "
                  << culpableReal.getSexo()
                  << "." << endl;
+
+            sexoDescubierto = true;
 
             cout << "La pista fue utilizada."
                  << endl;
@@ -270,36 +286,74 @@ void Detective::mostrarSospechosos() {
 
     cout << endl;
 
-    cout << "Lista de sospechosos:"
+    cout << "Sospechosos y atributos descubiertos:"
          << endl;
 
     for (auto& par : sospechosos) {
 
+        Sospechoso s = par.second;
+
         cout << endl;
 
         cout << "Nombre: "
-             << par.second.getNombre()
+             << s.getNombre()
              << endl;
 
         cout << "Crimen: "
-             << par.second.getCrimen()
+             << s.getCrimen()
              << endl;
 
-        cout << "Sexo: "
-             << par.second.getSexo()
-             << endl;
+        cout << "Sexo: ";
 
-        cout << "Cabello: "
-             << par.second.getCabello()
-             << endl;
+        if (sexoDescubierto) {
 
-        cout << "Piel: "
-             << par.second.getPiel()
-             << endl;
+            cout << s.getSexo();
 
-        cout << "Estatura: "
-             << par.second.getEstatura()
-             << endl;
+        } else {
+
+            cout << "?";
+        }
+
+        cout << endl;
+
+        cout << "Cabello: ";
+
+        if (cabelloDescubierto) {
+
+            cout << s.getCabello();
+
+        } else {
+
+            cout << "?";
+        }
+
+        cout << endl;
+
+        cout << "Piel: ";
+
+        if (pielDescubierta) {
+
+            cout << s.getPiel();
+
+        } else {
+
+            cout << "?";
+        }
+
+        cout << endl;
+
+        cout << "Estatura: ";
+
+        if (estaturaDescubierta) {
+
+            cout << s.getEstatura();
+
+        } else {
+
+            cout << "?";
+        }
+
+        cout << endl;
     }
 
     cout << endl;

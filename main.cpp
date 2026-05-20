@@ -152,13 +152,13 @@ int main() {
         cout << endl;
 
         cout << "W = Arriba" << endl;
-        cout << "S = Abajo" << endl;
+        cout << "K = Abajo" << endl;
         cout << "A = Izquierda" << endl;
         cout << "D = Derecha" << endl;
         cout << "T = Ver pistas" << endl;
         cout << "X = Usar ultima pista" << endl;
         cout << "I = Interrogar testigo" << endl;
-        cout << "M = Mostrar sospechosos" << endl;
+        cout << "S = Mostrar sospechosos" << endl;
         cout << "B = Mostrar ABB" << endl;
         cout << "Q = Salir" << endl;
 
@@ -172,7 +172,7 @@ int main() {
                 detective.moverArriba();
                 break;
 
-            case 'S':
+            case 'K':
                 detective.moverAbajo();
                 break;
 
@@ -219,6 +219,11 @@ int main() {
                          << endl;
                 }
 
+                if (tipoUsado == 'C') {
+
+                    mapa.abrirCalles();
+                }
+
                 if (tipoUsado != 'N') {
 
                     Nodo* nuevaPista;
@@ -256,7 +261,7 @@ int main() {
                 detective.interrogarTestigo();
                 break;
 
-            case 'M':
+            case 'S':
                 detective.mostrarSospechosos();
                 break;
 
@@ -343,6 +348,16 @@ int main() {
                 cout << endl;
 
                 cout << "ACUSACION INCORRECTA."
+                     << endl;
+
+                detective.setPuntaje(
+                        detective.getPuntaje() * 2);
+
+                cout << "Tu puntaje fue duplicado."
+                     << endl;
+
+                cout << "Puntaje final: "
+                     << detective.getPuntaje()
                      << endl;
 
                 cout << "El verdadero culpable era "

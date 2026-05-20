@@ -26,10 +26,10 @@ NodoABB* ArbolABB::insertarRec(
 
             raiz->dato =
                     nuevo->dato;
-            }
+        }
 
         return raiz;
-        }
+    }
 
     if (nuevo->dato.getPuntos() <
         raiz->dato.getPuntos()) {
@@ -39,13 +39,13 @@ NodoABB* ArbolABB::insertarRec(
                         raiz->izquierda,
                         nuevo);
 
-        } else {
+    } else {
 
-            raiz->derecha =
-                    insertarRec(
-                            raiz->derecha,
-                            nuevo);
-        }
+        raiz->derecha =
+                insertarRec(
+                        raiz->derecha,
+                        nuevo);
+    }
 
     return raiz;
 }
@@ -87,4 +87,49 @@ void ArbolABB::mostrarInorder() {
     mostrarRec(raiz);
 
     cout << endl;
+}
+
+bool ArbolABB::buscarDetective(
+        string nombre) {
+
+    NodoABB* actual = raiz;
+
+    while (actual != nullptr) {
+
+        if (actual->dato.getNombre()
+            == nombre) {
+
+            cout << endl;
+
+            cout << nombre
+                 << " ya jugo."
+                 << endl;
+
+            cout << "Mejor score: "
+                 << actual->dato.getPuntos()
+                 << endl;
+
+            return true;
+        }
+
+        if (nombre <
+            actual->dato.getNombre()) {
+
+            actual =
+                    actual->izquierda;
+
+        } else {
+
+            actual =
+                    actual->derecha;
+        }
+    }
+
+    cout << endl;
+
+    cout << nombre
+         << " no tiene registros."
+         << endl;
+
+    return false;
 }
