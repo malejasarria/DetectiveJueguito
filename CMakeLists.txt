@@ -17,4 +17,8 @@ add_executable(DetectiveJueguito main.cpp
         Testigo.cpp
         Testigo.h
         Sospechoso.cpp
-        Sospechoso.h)
+        Sospechoso.h
+        NodoABB.cpp
+        NodoABB.h
+        ArbolABB.cpp
+        ArbolABB.h)

@@ -136,7 +136,8 @@ void Detective::interrogarTestigo() {
 
         cout << endl;
 
-        cout << "No hay testigos en la cola." << endl;
+        cout << "No hay testigos en la cola."
+             << endl;
 
         return;
     }
@@ -145,23 +146,28 @@ void Detective::interrogarTestigo() {
 
     cout << endl;
 
-    cout << "Declaracion del testigo:" << endl;
+    cout << "Declaracion del testigo:"
+         << endl;
 
-    cout << actual.getDeclaracion() << endl;
+    cout << actual.getDeclaracion()
+         << endl;
 
     testigos.pop();
 }
 
-void Detective::agregarSospechoso(Sospechoso sospechoso) {
+void Detective::agregarSospechoso(
+        Sospechoso sospechoso) {
 
-    sospechosos[sospechoso.getNombre()] = sospechoso;
+    sospechosos[sospechoso.getNombre()]
+            = sospechoso;
 }
 
 void Detective::mostrarSospechosos() {
 
     cout << endl;
 
-    cout << "Lista de sospechosos:" << endl;
+    cout << "Lista de sospechosos:"
+         << endl;
 
     for (auto& par : sospechosos) {
 
@@ -177,4 +183,24 @@ void Detective::mostrarSospechosos() {
     }
 
     cout << endl;
+}
+
+void Detective::setCulpable(string nombre) {
+
+    culpableReal = nombre;
+}
+
+string Detective::getCulpable() {
+
+    return culpableReal;
+}
+
+int Detective::cantidadPistas() {
+
+    return pistas.size();
+}
+
+bool Detective::acusar(string nombre) {
+
+    return nombre == culpableReal;
 }

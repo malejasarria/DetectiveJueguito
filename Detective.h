@@ -29,6 +29,8 @@ private:
 
     unordered_map<string, Sospechoso> sospechosos;
 
+    string culpableReal;
+
 public:
 
     Detective(string nom);
@@ -64,6 +66,14 @@ public:
     void agregarSospechoso(Sospechoso sospechoso);
 
     void mostrarSospechosos();
+
+    void setCulpable(string nombre);
+
+    string getCulpable();
+
+    int cantidadPistas();
+
+    bool acusar(string nombre);
 
 };
 
