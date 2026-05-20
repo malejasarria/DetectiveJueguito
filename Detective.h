@@ -29,7 +29,7 @@ private:
 
     unordered_map<string, Sospechoso> sospechosos;
 
-    string culpableReal;
+    Sospechoso culpableReal;
 
 public:
 
@@ -71,9 +71,9 @@ public:
 
     void mostrarSospechosos();
 
-    void setCulpable(string nombre);
+    void setCulpable(Sospechoso sospechoso);
 
-    string getCulpable();
+    Sospechoso getCulpable();
 
     int cantidadPistas();
 

@@ -158,6 +158,10 @@ char Detective::usarPista() {
 
             puntaje = puntaje / 2;
 
+            cout << "El culpable tiene cabello "
+                 << culpableReal.getCabello()
+                 << "." << endl;
+
             cout << "Tu puntaje fue reducido a la mitad."
                  << endl;
 
@@ -168,8 +172,9 @@ char Detective::usarPista() {
             cout << "Pista C usada:"
                  << endl;
 
-            cout << "El culpable llevaba abrigo negro."
-                 << endl;
+            cout << "El culpable tiene piel "
+                 << culpableReal.getPiel()
+                 << "." << endl;
 
             break;
 
@@ -177,6 +182,10 @@ char Detective::usarPista() {
 
             cout << "Pista T usada:"
                  << endl;
+
+            cout << "El culpable es de estatura "
+                 << culpableReal.getEstatura()
+                 << "." << endl;
 
             int evento;
 
@@ -204,6 +213,10 @@ char Detective::usarPista() {
 
             cout << "Pista P usada:"
                  << endl;
+
+            cout << "El culpable es "
+                 << culpableReal.getSexo()
+                 << "." << endl;
 
             cout << "La pista fue utilizada."
                  << endl;
@@ -292,12 +305,13 @@ void Detective::mostrarSospechosos() {
     cout << endl;
 }
 
-void Detective::setCulpable(string nombre) {
+void Detective::setCulpable(
+        Sospechoso sospechoso) {
 
-    culpableReal = nombre;
+    culpableReal = sospechoso;
 }
 
-string Detective::getCulpable() {
+Sospechoso Detective::getCulpable() {
 
     return culpableReal;
 }
@@ -309,5 +323,6 @@ int Detective::cantidadPistas() {
 
 bool Detective::acusar(string nombre) {
 
-    return nombre == culpableReal;
+    return nombre ==
+           culpableReal.getNombre();
 }

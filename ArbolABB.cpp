@@ -9,58 +9,72 @@ ArbolABB::ArbolABB() {
     raiz = nullptr;
 }
 
-NodoABB* ArbolABB::insertarRecursivo(
-        NodoABB* nodo,
-        Score score) {
+NodoABB* ArbolABB::insertarRec(
+        NodoABB* raiz,
+        NodoABB* nuevo) {
 
-    if (nodo == nullptr) {
+    if (raiz == nullptr) {
 
-        return new NodoABB(score);
+        return nuevo;
     }
 
-    if (score.getPuntos() <
-        nodo->score.getPuntos()) {
+    if (nuevo->nombreDetective ==
+        raiz->nombreDetective) {
 
-        nodo->izquierda =
-                insertarRecursivo(
-                        nodo->izquierda,
-                        score);
+        if (nuevo->dato.getPuntos() <
+            raiz->dato.getPuntos()) {
+
+            raiz->dato =
+                    nuevo->dato;
+            }
+
+        return raiz;
+        }
+
+    if (nuevo->dato.getPuntos() <
+        raiz->dato.getPuntos()) {
+
+        raiz->izquierda =
+                insertarRec(
+                        raiz->izquierda,
+                        nuevo);
 
         } else {
 
-            nodo->derecha =
-                    insertarRecursivo(
-                            nodo->derecha,
-                            score);
+            raiz->derecha =
+                    insertarRec(
+                            raiz->derecha,
+                            nuevo);
         }
 
-    return nodo;
+    return raiz;
 }
 
-void ArbolABB::insertar(Score score) {
+void ArbolABB::insertar(Score dato) {
 
-    raiz = insertarRecursivo(
+    NodoABB* nuevo =
+            new NodoABB(dato);
+
+    raiz = insertarRec(
             raiz,
-            score);
+            nuevo);
 }
 
-void ArbolABB::inorderRecursivo(
-        NodoABB* nodo) {
+void ArbolABB::mostrarRec(
+        NodoABB* raiz) {
 
-    if (nodo == nullptr) {
+    if (raiz != nullptr) {
 
-        return;
+        mostrarRec(raiz->izquierda);
+
+        cout << raiz->dato.getNombre()
+             << " -> "
+             << raiz->dato.getPuntos()
+             << " puntos"
+             << endl;
+
+        mostrarRec(raiz->derecha);
     }
-
-    inorderRecursivo(nodo->izquierda);
-
-    cout << nodo->score.getNombre()
-         << " -> "
-         << nodo->score.getPuntos()
-         << " puntos"
-         << endl;
-
-    inorderRecursivo(nodo->derecha);
 }
 
 void ArbolABB::mostrarInorder() {
@@ -70,7 +84,7 @@ void ArbolABB::mostrarInorder() {
     cout << "Ranking historico:"
          << endl;
 
-    inorderRecursivo(raiz);
+    mostrarRec(raiz);
 
     cout << endl;
 }

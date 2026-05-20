@@ -9,17 +9,18 @@ private:
 
     NodoABB* raiz;
 
-    NodoABB* insertarRecursivo(
-            NodoABB* nodo,
-            Score score);
+    NodoABB* insertarRec(
+            NodoABB* raiz,
+            NodoABB* nuevo);
 
-    void inorderRecursivo(NodoABB* nodo);
+    void mostrarRec(
+            NodoABB* raiz);
 
 public:
 
     ArbolABB();
 
-    void insertar(Score score);
+    void insertar(Score dato);
 
     void mostrarInorder();
 };

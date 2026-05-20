@@ -23,94 +23,93 @@ int main() {
 
     ArbolABB arbol;
 
-    string nombres[8] = {
+    Sospechoso sospechosos[8] = {
 
-            "Carlos",
-            "Ana",
-            "Miguel",
-            "Laura",
-            "Pedro",
-            "Camila",
-            "Jorge",
-            "Sofia"
-    };
-
-    int indiceCulpable = rand() % 8;
-
-    detective.setCulpable(
-            nombres[indiceCulpable]);
-
-    detective.agregarSospechoso(
             Sospechoso(
                     "Carlos",
                     "Robo",
                     "Masculino",
                     "Negro",
                     "Morena",
-                    "Alto"));
+                    "Alto"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Ana",
                     "Fraude",
                     "Femenino",
                     "Rubio",
                     "Blanca",
-                    "Baja"));
+                    "Baja"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Miguel",
                     "Asesinato",
                     "Masculino",
                     "Oscuro",
                     "Triguena",
-                    "Mediano"));
+                    "Mediano"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Laura",
                     "Secuestro",
                     "Femenino",
                     "Castano",
                     "Blanca",
-                    "Alta"));
+                    "Alta"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Pedro",
                     "Extorsion",
                     "Masculino",
                     "Pelirrojo",
                     "Morena",
-                    "Bajo"));
+                    "Bajo"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Camila",
                     "Hackeo",
                     "Femenino",
                     "Negro",
                     "Triguena",
-                    "Mediana"));
+                    "Mediana"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Jorge",
                     "Estafa",
                     "Masculino",
                     "Canoso",
                     "Blanca",
-                    "Alta"));
+                    "Alta"
+            ),
 
-    detective.agregarSospechoso(
             Sospechoso(
                     "Sofia",
                     "Contrabando",
                     "Femenino",
                     "Oscuro",
                     "Morena",
-                    "Baja"));
+                    "Baja"
+            )
+    };
+
+    for (int i = 0; i < 8; i++) {
+
+        detective.agregarSospechoso(
+                sospechosos[i]);
+    }
+
+    int indiceCulpable;
+
+    indiceCulpable = rand() % 8;
+
+    detective.setCulpable(
+            sospechosos[indiceCulpable]);
 
     arbol.insertar(
             Score("Laura", 40));
@@ -121,16 +120,21 @@ int main() {
     arbol.insertar(
             Score("Camila", 28));
 
-    Nodo* inicioDetective = mapa.obtenerNodoAleatorio();
+    Nodo* inicioDetective;
+
+    inicioDetective =
+            mapa.obtenerNodoAleatorio();
 
     while (inicioDetective->bloqueado ||
            inicioDetective->tienePista ||
            inicioDetective->tieneTestigo) {
 
-        inicioDetective = mapa.obtenerNodoAleatorio();
+        inicioDetective =
+                mapa.obtenerNodoAleatorio();
     }
 
-    detective.setPosicion(inicioDetective);
+    detective.setPosicion(
+            inicioDetective);
 
     char movimiento;
 
@@ -188,25 +192,60 @@ int main() {
 
                 char tipoUsado;
 
-                tipoUsado = detective.usarPista();
+                tipoUsado =
+                        detective.usarPista();
 
                 if (tipoUsado == 'P') {
 
                     Nodo* nuevoLugar;
 
-                    nuevoLugar = mapa.obtenerNodoAleatorio();
+                    nuevoLugar =
+                            mapa.obtenerNodoAleatorio();
 
-                    while (nuevoLugar->bloqueado) {
+                    while (nuevoLugar->bloqueado ||
+                           nuevoLugar->tienePista ||
+                           nuevoLugar->tieneTestigo) {
 
                         nuevoLugar =
                                 mapa.obtenerNodoAleatorio();
                     }
 
-                    detective.setPosicion(nuevoLugar);
+                    detective.setPosicion(
+                            nuevoLugar);
 
                     cout << endl;
 
                     cout << "Fuiste teletransportado."
+                         << endl;
+                }
+
+                if (tipoUsado != 'N') {
+
+                    Nodo* nuevaPista;
+
+                    nuevaPista =
+                            mapa.obtenerNodoAleatorio();
+
+                    while (nuevaPista->bloqueado ||
+                           nuevaPista->tienePista ||
+                           nuevaPista->tieneTestigo) {
+
+                        nuevaPista =
+                                mapa.obtenerNodoAleatorio();
+                    }
+
+                    nuevaPista->tienePista =
+                            true;
+
+                    nuevaPista->tipoPista =
+                            tipoUsado;
+
+                    nuevaPista->contenido =
+                            tipoUsado;
+
+                    cout << endl;
+
+                    cout << "La pista regreso al mapa."
                          << endl;
                 }
 
@@ -233,16 +272,19 @@ int main() {
             Testigo nuevo(
                     "Vi algo sospechoso cerca del callejon.");
 
-            detective.agregarTestigo(nuevo);
+            detective.agregarTestigo(
+                    nuevo);
 
             cout << endl;
 
             cout << "Un testigo fue agregado a la cola."
                  << endl;
 
-            detective.getPosicion()->tieneTestigo = false;
+            detective.getPosicion()->tieneTestigo =
+                    false;
 
-            detective.getPosicion()->contenido = 'o';
+            detective.getPosicion()->contenido =
+                    'o';
         }
 
         if (detective.cantidadPistas() >= 10) {
@@ -275,7 +317,8 @@ int main() {
 
                 cout << endl;
 
-                cout << "CASO RESUELTO!" << endl;
+                cout << "CASO RESUELTO!"
+                     << endl;
 
                 cout << acusacion
                      << " era el culpable."
@@ -303,7 +346,7 @@ int main() {
                      << endl;
 
                 cout << "El verdadero culpable era "
-                     << detective.getCulpable()
+                     << detective.getCulpable().getNombre()
                      << endl;
             }
 

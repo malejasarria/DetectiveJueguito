@@ -1,7 +1,11 @@
 #include "NodoABB.h"
 
-NodoABB::NodoABB(Score s)
-    : score(s) {
+NodoABB::NodoABB(Score d) {
+
+    dato = d;
+
+    nombreDetective =
+            d.getNombre();
 
     izquierda = nullptr;
 

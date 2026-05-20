@@ -3,17 +3,23 @@
 
 #include "Score.h"
 
+#include <string>
+
+using namespace std;
+
 class NodoABB {
 
 public:
 
-    Score score;
+    Score dato;
+
+    string nombreDetective;
 
     NodoABB* izquierda;
 
     NodoABB* derecha;
 
-    NodoABB(Score s);
+    NodoABB(Score d);
 };
 
 #endif
