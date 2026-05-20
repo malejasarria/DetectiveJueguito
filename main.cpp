@@ -184,9 +184,34 @@ int main() {
                 detective.mostrarPistas();
                 break;
 
-            case 'X':
-                detective.usarPista();
+            case 'X': {
+
+                char tipoUsado;
+
+                tipoUsado = detective.usarPista();
+
+                if (tipoUsado == 'P') {
+
+                    Nodo* nuevoLugar;
+
+                    nuevoLugar = mapa.obtenerNodoAleatorio();
+
+                    while (nuevoLugar->bloqueado) {
+
+                        nuevoLugar =
+                                mapa.obtenerNodoAleatorio();
+                    }
+
+                    detective.setPosicion(nuevoLugar);
+
+                    cout << endl;
+
+                    cout << "Fuiste teletransportado."
+                         << endl;
+                }
+
                 break;
+            }
 
             case 'I':
                 detective.interrogarTestigo();

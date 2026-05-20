@@ -45,6 +45,8 @@ public:
 
     void aumentarPuntaje();
 
+    void setPuntaje(int p);
+
     void moverArriba();
 
     void moverAbajo();
@@ -57,9 +59,9 @@ public:
 
     void mostrarPistas();
 
-    void usarPista();
-
     void revisarPista();
+
+    char usarPista();
 
     void agregarTestigo(Testigo testigo);
 
@@ -76,7 +78,6 @@ public:
     int cantidadPistas();
 
     bool acusar(string nombre);
-
 };
 
 #endif

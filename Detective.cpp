@@ -1,6 +1,7 @@
 #include "Detective.h"
 
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -36,6 +37,11 @@ int Detective::getPuntaje() {
 void Detective::aumentarPuntaje() {
 
     puntaje++;
+}
+
+void Detective::setPuntaje(int p) {
+
+    puntaje = p;
 }
 
 void Detective::moverArriba() {
@@ -125,7 +131,7 @@ void Detective::revisarPista() {
     }
 }
 
-void Detective::usarPista() {
+char Detective::usarPista() {
 
     if (pistas.empty()) {
 
@@ -134,7 +140,7 @@ void Detective::usarPista() {
         cout << "No tienes pistas."
              << endl;
 
-        return;
+        return 'N';
     }
 
     Pista ultima = pistas.top();
@@ -150,7 +156,9 @@ void Detective::usarPista() {
             cout << "Pista H usada:"
                  << endl;
 
-            cout << "El culpable tenia cabello oscuro."
+            puntaje = puntaje / 2;
+
+            cout << "Tu puntaje fue reducido a la mitad."
                  << endl;
 
             break;
@@ -165,28 +173,47 @@ void Detective::usarPista() {
 
             break;
 
-        case 'T':
+        case 'T': {
 
             cout << "Pista T usada:"
                  << endl;
 
-            cout << "El culpable fue visto cerca del teatro."
-                 << endl;
+            int evento;
+
+            evento = rand() % 2;
+
+            if (evento == 0) {
+
+                puntaje = 0;
+
+                cout << "Tu puntaje fue reiniciado a 0."
+                     << endl;
+
+            } else {
+
+                puntaje = puntaje * 2;
+
+                cout << "Tu puntaje fue multiplicado por 2."
+                     << endl;
+            }
 
             break;
+        }
 
         case 'P':
 
             cout << "Pista P usada:"
                  << endl;
 
-            cout << "El culpable dejo huellas pequenas."
+            cout << "La pista fue utilizada."
                  << endl;
 
             break;
     }
 
     cout << endl;
+
+    return ultima.getTipo();
 }
 
 void Detective::agregarTestigo(Testigo testigo) {
@@ -246,8 +273,8 @@ void Detective::mostrarSospechosos() {
              << endl;
 
         cout << "Sexo: "
-     << par.second.getSexo()
-     << endl;
+             << par.second.getSexo()
+             << endl;
 
         cout << "Cabello: "
              << par.second.getCabello()
@@ -260,10 +287,6 @@ void Detective::mostrarSospechosos() {
         cout << "Estatura: "
              << par.second.getEstatura()
              << endl;
-
-
-
-
     }
 
     cout << endl;
