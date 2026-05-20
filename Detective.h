@@ -57,6 +57,8 @@ public:
 
     void mostrarPistas();
 
+    void usarPista();
+
     void revisarPista();
 
     void agregarTestigo(Testigo testigo);

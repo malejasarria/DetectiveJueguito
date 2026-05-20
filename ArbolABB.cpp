@@ -11,40 +11,41 @@ ArbolABB::ArbolABB() {
 
 NodoABB* ArbolABB::insertarRecursivo(
         NodoABB* nodo,
-        Sospechoso sospechoso) {
+        Score score) {
 
     if (nodo == nullptr) {
 
-        return new NodoABB(sospechoso);
+        return new NodoABB(score);
     }
 
-    if (sospechoso.getNombre() <
-        nodo->sospechoso.getNombre()) {
+    if (score.getPuntos() <
+        nodo->score.getPuntos()) {
 
         nodo->izquierda =
                 insertarRecursivo(
                         nodo->izquierda,
-                        sospechoso);
+                        score);
 
         } else {
 
             nodo->derecha =
                     insertarRecursivo(
                             nodo->derecha,
-                            sospechoso);
+                            score);
         }
 
     return nodo;
 }
 
-void ArbolABB::insertar(Sospechoso sospechoso) {
+void ArbolABB::insertar(Score score) {
 
     raiz = insertarRecursivo(
             raiz,
-            sospechoso);
+            score);
 }
 
-void ArbolABB::inorderRecursivo(NodoABB* nodo) {
+void ArbolABB::inorderRecursivo(
+        NodoABB* nodo) {
 
     if (nodo == nullptr) {
 
@@ -53,9 +54,10 @@ void ArbolABB::inorderRecursivo(NodoABB* nodo) {
 
     inorderRecursivo(nodo->izquierda);
 
-    cout << nodo->sospechoso.getNombre()
-         << " - "
-         << nodo->sospechoso.getCrimen()
+    cout << nodo->score.getNombre()
+         << " -> "
+         << nodo->score.getPuntos()
+         << " puntos"
          << endl;
 
     inorderRecursivo(nodo->derecha);
@@ -65,7 +67,7 @@ void ArbolABB::mostrarInorder() {
 
     cout << endl;
 
-    cout << "Sospechosos ordenados:"
+    cout << "Ranking historico:"
          << endl;
 
     inorderRecursivo(raiz);

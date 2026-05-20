@@ -1,19 +1,19 @@
 #ifndef NODOABB_H
 #define NODOABB_H
 
-#include "Sospechoso.h"
+#include "Score.h"
 
 class NodoABB {
 
 public:
 
-    Sospechoso sospechoso;
+    Score score;
 
     NodoABB* izquierda;
 
     NodoABB* derecha;
 
-    NodoABB(Sospechoso s);
+    NodoABB(Score s);
 };
 
 #endif

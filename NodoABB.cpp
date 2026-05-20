@@ -1,7 +1,7 @@
 #include "NodoABB.h"
 
-NodoABB::NodoABB(Sospechoso s)
-    : sospechoso(s) {
+NodoABB::NodoABB(Score s)
+    : score(s) {
 
     izquierda = nullptr;
 

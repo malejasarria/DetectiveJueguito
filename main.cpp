@@ -21,27 +21,45 @@ int main() {
 
     Detective detective(nombre);
 
-    ArbolABB arbol;
-
     detective.setCulpable("Miguel");
 
-    detective.agregarSospechoso(
-            Sospechoso("Carlos", "Robo"));
+    ArbolABB arbol;
 
     detective.agregarSospechoso(
-            Sospechoso("Ana", "Fraude"));
+        Sospechoso(
+                "Carlos",
+                "Robo",
+                "Masculino",
+                "Negro",
+                "Morena",
+                "Alto"));
 
     detective.agregarSospechoso(
-            Sospechoso("Miguel", "Asesinato"));
+            Sospechoso(
+                    "Ana",
+                    "Fraude",
+                    "Femenino",
+                    "Rubio",
+                    "Blanca",
+                    "Baja"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Miguel",
+                    "Asesinato",
+                    "Masculino",
+                    "Oscuro",
+                    "Triguena",
+                    "Mediano"));
 
     arbol.insertar(
-            Sospechoso("Carlos", "Robo"));
+            Score("Laura", 40));
 
     arbol.insertar(
-            Sospechoso("Ana", "Fraude"));
+            Score("Pedro", 15));
 
     arbol.insertar(
-            Sospechoso("Miguel", "Asesinato"));
+            Score("Camila", 28));
 
     Nodo* inicioDetective = mapa.obtenerNodoAleatorio();
 
@@ -74,6 +92,7 @@ int main() {
         cout << "A = Izquierda" << endl;
         cout << "D = Derecha" << endl;
         cout << "T = Ver pistas" << endl;
+        cout << "X = Usar ultima pista" << endl;
         cout << "I = Interrogar testigo" << endl;
         cout << "M = Mostrar sospechosos" << endl;
         cout << "B = Mostrar ABB" << endl;
@@ -103,6 +122,10 @@ int main() {
 
             case 'T':
                 detective.mostrarPistas();
+                break;
+
+            case 'X':
+                detective.usarPista();
                 break;
 
             case 'I':
@@ -167,7 +190,8 @@ int main() {
 
                 cout << endl;
 
-                cout << "CASO RESUELTO!" << endl;
+                cout << "CASO RESUELTO!"
+                     << endl;
 
                 cout << acusacion
                      << " era el culpable."

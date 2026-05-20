@@ -125,6 +125,70 @@ void Detective::revisarPista() {
     }
 }
 
+void Detective::usarPista() {
+
+    if (pistas.empty()) {
+
+        cout << endl;
+
+        cout << "No tienes pistas."
+             << endl;
+
+        return;
+    }
+
+    Pista ultima = pistas.top();
+
+    pistas.pop();
+
+    cout << endl;
+
+    switch (ultima.getTipo()) {
+
+        case 'H':
+
+            cout << "Pista H usada:"
+                 << endl;
+
+            cout << "El culpable tenia cabello oscuro."
+                 << endl;
+
+            break;
+
+        case 'C':
+
+            cout << "Pista C usada:"
+                 << endl;
+
+            cout << "El culpable llevaba abrigo negro."
+                 << endl;
+
+            break;
+
+        case 'T':
+
+            cout << "Pista T usada:"
+                 << endl;
+
+            cout << "El culpable fue visto cerca del teatro."
+                 << endl;
+
+            break;
+
+        case 'P':
+
+            cout << "Pista P usada:"
+                 << endl;
+
+            cout << "El culpable dejo huellas pequenas."
+                 << endl;
+
+            break;
+    }
+
+    cout << endl;
+}
+
 void Detective::agregarTestigo(Testigo testigo) {
 
     testigos.push(testigo);
@@ -180,6 +244,26 @@ void Detective::mostrarSospechosos() {
         cout << "Crimen: "
              << par.second.getCrimen()
              << endl;
+
+        cout << "Sexo: "
+     << par.second.getSexo()
+     << endl;
+
+        cout << "Cabello: "
+             << par.second.getCabello()
+             << endl;
+
+        cout << "Piel: "
+             << par.second.getPiel()
+             << endl;
+
+        cout << "Estatura: "
+             << par.second.getEstatura()
+             << endl;
+
+
+
+
     }
 
     cout << endl;

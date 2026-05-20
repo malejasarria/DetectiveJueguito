@@ -21,4 +21,6 @@ add_executable(DetectiveJueguito main.cpp
         NodoABB.cpp
         NodoABB.h
         ArbolABB.cpp
-        ArbolABB.h)
+        ArbolABB.h
+        score.cpp
+        score.h)

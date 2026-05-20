@@ -11,7 +11,7 @@ private:
 
     NodoABB* insertarRecursivo(
             NodoABB* nodo,
-            Sospechoso sospechoso);
+            Score score);
 
     void inorderRecursivo(NodoABB* nodo);
 
@@ -19,7 +19,7 @@ public:
 
     ArbolABB();
 
-    void insertar(Sospechoso sospechoso);
+    void insertar(Score score);
 
     void mostrarInorder();
 };
