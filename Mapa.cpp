@@ -18,7 +18,7 @@ void Mapa::crearMapa() {
 
     Nodo* filaActualInicio = nullptr;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
 
         Nodo* actual = nullptr;
 
@@ -26,7 +26,7 @@ void Mapa::crearMapa() {
 
         Nodo* arriba = filaAnteriorInicio;
 
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 9; j++) {
 
             Nodo* nuevo = new Nodo(i, j);
 
@@ -94,7 +94,7 @@ void Mapa::crearMapa() {
 
     int bloqueos = 0;
 
-    while (bloqueos < 20) {
+    while (bloqueos < 16) {
 
         Nodo* actual =
                 obtenerNodoAleatorio();
@@ -138,21 +138,21 @@ void Mapa::imprimirMapa(
 
     cout << endl;
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 11; i++) {
 
         cout << "# ";
     }
 
     cout << endl;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 9; i++) {
 
         cout << "# ";
 
         Nodo* columnaActual =
                 filaActual;
 
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 9; j++) {
 
             if (columnaActual ==
                 detective.getPosicion()) {
@@ -175,7 +175,7 @@ void Mapa::imprimirMapa(
                 filaActual->abajo;
     }
 
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 11; i++) {
 
         cout << "# ";
     }
@@ -193,10 +193,10 @@ Nodo* Mapa::obtenerNodoAleatorio() {
     Nodo* actual = inicio;
 
     int fila =
-            rand() % 10;
+            rand() % 9;
 
     int columna =
-            rand() % 10;
+            rand() % 9;
 
     for (int i = 0; i < fila; i++) {
 

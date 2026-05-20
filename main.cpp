@@ -152,7 +152,7 @@ int main() {
         cout << endl;
 
         cout << "W = Arriba" << endl;
-        cout << "K = Abajo" << endl;
+        cout << "S = Abajo" << endl;
         cout << "A = Izquierda" << endl;
         cout << "D = Derecha" << endl;
         cout << "T = Ver pistas" << endl;
@@ -160,6 +160,7 @@ int main() {
         cout << "I = Interrogar testigo" << endl;
         cout << "S = Mostrar sospechosos" << endl;
         cout << "B = Mostrar ABB" << endl;
+        cout << "F = Buscar detective" << endl;
         cout << "Q = Salir" << endl;
 
         cin >> movimiento;
@@ -172,7 +173,7 @@ int main() {
                 detective.moverArriba();
                 break;
 
-            case 'K':
+            case 'S':
                 detective.moverAbajo();
                 break;
 
@@ -261,13 +262,25 @@ int main() {
                 detective.interrogarTestigo();
                 break;
 
-            case 'S':
-                detective.mostrarSospechosos();
-                break;
-
             case 'B':
                 arbol.mostrarInorder();
                 break;
+
+            case 'F': {
+
+                string buscado;
+
+                cout << endl;
+
+                cout << "Nombre del detective: ";
+
+                cin >> buscado;
+
+                arbol.buscarDetective(
+                        buscado);
+
+                break;
+            }
         }
 
         detective.revisarPista();
