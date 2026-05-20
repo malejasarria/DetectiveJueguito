@@ -22,6 +22,12 @@ public:
 
     Nodo* obtenerNodoAleatorio();
 
+    void generarCallejones();
+
+    void generarPistas();
+
+    void generarTestigos();
+
 };
 
 #endif

@@ -12,6 +12,14 @@ public:
 
     char contenido;
 
+    bool bloqueado;
+
+    bool tienePista;
+
+    char tipoPista;
+
+    bool tieneTestigo;
+
     bool descubierto;
 
     Nodo* arriba;

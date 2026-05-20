@@ -7,6 +7,14 @@ Nodo::Nodo(int f, int c) {
 
     contenido = 'o';
 
+    bloqueado = false;
+
+    tienePista = false;
+
+    tipoPista = ' ';
+
+    tieneTestigo = false;
+
     descubierto = false;
 
     arriba = nullptr;

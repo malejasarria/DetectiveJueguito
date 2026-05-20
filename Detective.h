@@ -2,8 +2,12 @@
 #define DETECTIVE_H
 
 #include "Nodo.h"
+#include "Pista.h"
+#include "Testigo.h"
 
 #include <string>
+#include <stack>
+#include <queue>
 
 using namespace std;
 
@@ -16,6 +20,10 @@ private:
     int puntaje;
 
     Nodo* posicionActual;
+
+    stack<Pista> pistas;
+
+    queue<Testigo> testigos;
 
 public:
 
@@ -38,6 +46,16 @@ public:
     void moverIzquierda();
 
     void moverDerecha();
+
+    void agregarPista(Pista pista);
+
+    void mostrarPistas();
+
+    void revisarPista();
+
+    void agregarTestigo(Testigo testigo);
+
+    void interrogarTestigo();
 
 };
 

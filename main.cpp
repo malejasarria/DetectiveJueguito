@@ -22,13 +22,20 @@ int main() {
 
     Nodo* inicioDetective = mapa.obtenerNodoAleatorio();
 
+    while (inicioDetective->bloqueado ||
+           inicioDetective->tienePista ||
+           inicioDetective->tieneTestigo) {
+
+        inicioDetective = mapa.obtenerNodoAleatorio();
+    }
+
     detective.setPosicion(inicioDetective);
 
     char movimiento;
 
     do {
 
-
+        cout << endl;
 
         cout << detective.getNombre()
              << ", tu puntaje actual es: "
@@ -43,6 +50,8 @@ int main() {
         cout << "S = Abajo" << endl;
         cout << "A = Izquierda" << endl;
         cout << "D = Derecha" << endl;
+        cout << "T = Ver pistas" << endl;
+        cout << "I = Interrogar testigo" << endl;
         cout << "Q = Salir" << endl;
 
         cin >> movimiento;
@@ -66,6 +75,31 @@ int main() {
             case 'D':
                 detective.moverDerecha();
                 break;
+
+            case 'T':
+                detective.mostrarPistas();
+                break;
+
+            case 'I':
+                detective.interrogarTestigo();
+                break;
+        }
+
+        detective.revisarPista();
+
+        if (detective.getPosicion()->tieneTestigo) {
+
+            Testigo nuevo("Vi algo sospechoso cerca del callejon.");
+
+            detective.agregarTestigo(nuevo);
+
+            cout << endl;
+
+            cout << "Un testigo fue agregado a la cola." << endl;
+
+            detective.getPosicion()->tieneTestigo = false;
+
+            detective.getPosicion()->contenido = 'o';
         }
 
     } while (movimiento != 'Q');
