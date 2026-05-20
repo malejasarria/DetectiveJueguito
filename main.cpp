@@ -21,18 +21,33 @@ int main() {
 
     Detective detective(nombre);
 
-    detective.setCulpable("Miguel");
-
     ArbolABB arbol;
 
+    string nombres[8] = {
+
+            "Carlos",
+            "Ana",
+            "Miguel",
+            "Laura",
+            "Pedro",
+            "Camila",
+            "Jorge",
+            "Sofia"
+    };
+
+    int indiceCulpable = rand() % 8;
+
+    detective.setCulpable(
+            nombres[indiceCulpable]);
+
     detective.agregarSospechoso(
-        Sospechoso(
-                "Carlos",
-                "Robo",
-                "Masculino",
-                "Negro",
-                "Morena",
-                "Alto"));
+            Sospechoso(
+                    "Carlos",
+                    "Robo",
+                    "Masculino",
+                    "Negro",
+                    "Morena",
+                    "Alto"));
 
     detective.agregarSospechoso(
             Sospechoso(
@@ -51,6 +66,51 @@ int main() {
                     "Oscuro",
                     "Triguena",
                     "Mediano"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Laura",
+                    "Secuestro",
+                    "Femenino",
+                    "Castano",
+                    "Blanca",
+                    "Alta"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Pedro",
+                    "Extorsion",
+                    "Masculino",
+                    "Pelirrojo",
+                    "Morena",
+                    "Bajo"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Camila",
+                    "Hackeo",
+                    "Femenino",
+                    "Negro",
+                    "Triguena",
+                    "Mediana"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Jorge",
+                    "Estafa",
+                    "Masculino",
+                    "Canoso",
+                    "Blanca",
+                    "Alta"));
+
+    detective.agregarSospechoso(
+            Sospechoso(
+                    "Sofia",
+                    "Contrabando",
+                    "Femenino",
+                    "Oscuro",
+                    "Morena",
+                    "Baja"));
 
     arbol.insertar(
             Score("Laura", 40));
@@ -190,12 +250,25 @@ int main() {
 
                 cout << endl;
 
-                cout << "CASO RESUELTO!"
-                     << endl;
+                cout << "CASO RESUELTO!" << endl;
 
                 cout << acusacion
                      << " era el culpable."
                      << endl;
+
+                arbol.insertar(
+                        Score(
+                                detective.getNombre(),
+                                detective.getPuntaje()));
+
+                cout << endl;
+
+                cout << "Tu score fue agregado al ABB."
+                     << endl;
+
+                cout << endl;
+
+                arbol.mostrarInorder();
 
             } else {
 
