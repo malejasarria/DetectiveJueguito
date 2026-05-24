@@ -5,7 +5,8 @@
 
 using namespace std;
 
-Detective::Detective(string nom) {
+Detective::Detective(
+        string nom) {
 
     nombre = nom;
 
@@ -22,7 +23,8 @@ Detective::Detective(string nom) {
     estaturaDescubierta = false;
 }
 
-void Detective::setPosicion(Nodo* nodo) {
+void Detective::setPosicion(
+        Nodo* nodo) {
 
     posicionActual = nodo;
 }
@@ -32,12 +34,12 @@ Nodo* Detective::getPosicion() {
     return posicionActual;
 }
 
-string Detective::getNombre() {
+string Detective::getNombre() const {
 
     return nombre;
 }
 
-int Detective::getPuntaje() {
+int Detective::getPuntaje() const {
 
     return puntaje;
 }
@@ -47,7 +49,8 @@ void Detective::aumentarPuntaje() {
     puntaje++;
 }
 
-void Detective::setPuntaje(int p) {
+void Detective::setPuntaje(
+        int p) {
 
     puntaje = p;
 }
@@ -57,7 +60,8 @@ void Detective::moverArriba() {
     if (posicionActual->arriba != nullptr &&
         !posicionActual->arriba->bloqueado) {
 
-        posicionActual = posicionActual->arriba;
+        posicionActual =
+                posicionActual->arriba;
 
         aumentarPuntaje();
     }
@@ -68,7 +72,8 @@ void Detective::moverAbajo() {
     if (posicionActual->abajo != nullptr &&
         !posicionActual->abajo->bloqueado) {
 
-        posicionActual = posicionActual->abajo;
+        posicionActual =
+                posicionActual->abajo;
 
         aumentarPuntaje();
     }
@@ -79,7 +84,8 @@ void Detective::moverIzquierda() {
     if (posicionActual->izquierda != nullptr &&
         !posicionActual->izquierda->bloqueado) {
 
-        posicionActual = posicionActual->izquierda;
+        posicionActual =
+                posicionActual->izquierda;
 
         aumentarPuntaje();
     }
@@ -90,58 +96,49 @@ void Detective::moverDerecha() {
     if (posicionActual->derecha != nullptr &&
         !posicionActual->derecha->bloqueado) {
 
-        posicionActual = posicionActual->derecha;
+        posicionActual =
+                posicionActual->derecha;
 
         aumentarPuntaje();
     }
 }
 
-void Detective::agregarPista(Pista pista) {
+void Detective::agregarPista(
+        char tipo) {
 
-    pistas.push(pista);
+    pistas.push(tipo);
 }
 
 void Detective::mostrarPistas() {
 
-    stack<Pista> copia = pistas;
-
-    cout << endl;
-
-    cout << "Pistas recolectadas:" << endl;
-
-    while (!copia.empty()) {
-
-        cout << copia.top().getTipo() << endl;
-
-        copia.pop();
-    }
-
-    cout << endl;
+    pistas.mostrar();
 }
 
 void Detective::revisarPista() {
 
     if (posicionActual->tienePista) {
 
-        Pista nueva(posicionActual->tipoPista);
-
-        agregarPista(nueva);
+        agregarPista(
+                posicionActual->tipoPista);
 
         cout << endl;
 
         cout << "Has encontrado una pista tipo "
              << posicionActual->tipoPista
-             << "!" << endl;
+             << "!"
+             << endl;
 
-        posicionActual->tienePista = false;
+        posicionActual->tienePista =
+                false;
 
-        posicionActual->contenido = 'o';
+        posicionActual->contenido =
+                'o';
     }
 }
 
 char Detective::usarPista() {
 
-    if (pistas.empty()) {
+    if (pistas.estaVacia()) {
 
         cout << endl;
 
@@ -151,26 +148,30 @@ char Detective::usarPista() {
         return 'N';
     }
 
-    Pista ultima = pistas.top();
+    char ultima =
+            pistas.top();
 
     pistas.pop();
 
     cout << endl;
 
-    switch (ultima.getTipo()) {
+    switch (ultima) {
 
         case 'H':
 
             cout << "Pista H usada:"
                  << endl;
 
-            puntaje = puntaje / 2;
+            puntaje =
+                    puntaje / 2;
 
             cout << "El culpable tiene cabello "
                  << culpableReal.getCabello()
-                 << "." << endl;
+                 << "."
+                 << endl;
 
-            cabelloDescubierto = true;
+            cabelloDescubierto =
+                    true;
 
             cout << "Tu puntaje fue reducido a la mitad."
                  << endl;
@@ -184,9 +185,11 @@ char Detective::usarPista() {
 
             cout << "El culpable tiene piel "
                  << culpableReal.getPiel()
-                 << "." << endl;
+                 << "."
+                 << endl;
 
-            pielDescubierta = true;
+            pielDescubierta =
+                    true;
 
             break;
 
@@ -197,13 +200,14 @@ char Detective::usarPista() {
 
             cout << "El culpable es de estatura "
                  << culpableReal.getEstatura()
-                 << "." << endl;
+                 << "."
+                 << endl;
 
-            estaturaDescubierta = true;
+            estaturaDescubierta =
+                    true;
 
-            int evento;
-
-            evento = rand() % 2;
+            int evento =
+                    rand() % 2;
 
             if (evento == 0) {
 
@@ -214,7 +218,8 @@ char Detective::usarPista() {
 
             } else {
 
-                puntaje = puntaje * 2;
+                puntaje =
+                        puntaje * 2;
 
                 cout << "Tu puntaje fue multiplicado por 2."
                      << endl;
@@ -230,9 +235,11 @@ char Detective::usarPista() {
 
             cout << "El culpable es "
                  << culpableReal.getSexo()
-                 << "." << endl;
+                 << "."
+                 << endl;
 
-            sexoDescubierto = true;
+            sexoDescubierto =
+                    true;
 
             cout << "La pista fue utilizada."
                  << endl;
@@ -242,17 +249,18 @@ char Detective::usarPista() {
 
     cout << endl;
 
-    return ultima.getTipo();
+    return ultima;
 }
 
-void Detective::agregarTestigo(Testigo testigo) {
+void Detective::agregarTestigo(
+        Testigo testigo) {
 
-    testigos.push(testigo);
+    testigos.enqueue(testigo);
 }
 
 void Detective::interrogarTestigo() {
 
-    if (testigos.empty()) {
+    if (testigos.estaVacia()) {
 
         cout << endl;
 
@@ -262,7 +270,8 @@ void Detective::interrogarTestigo() {
         return;
     }
 
-    Testigo actual = testigos.front();
+    Testigo actual =
+            testigos.front();
 
     cout << endl;
 
@@ -272,110 +281,99 @@ void Detective::interrogarTestigo() {
     cout << actual.getDeclaracion()
          << endl;
 
-    testigos.pop();
+    testigos.dequeue();
 }
 
 void Detective::agregarSospechoso(
         Sospechoso sospechoso) {
 
-    sospechosos[sospechoso.getNombre()]
-            = sospechoso;
+    sospechosos.insertar(
+            sospechoso);
 }
 
 void Detective::mostrarSospechosos() {
 
+    sospechosos.mostrar();
+
     cout << endl;
 
-    cout << "Sospechosos y atributos descubiertos:"
+    cout << "Atributos descubiertos:"
          << endl;
 
-    for (auto& par : sospechosos) {
+    cout << endl;
 
-        Sospechoso s = par.second;
+    cout << "Sexo: ";
 
-        cout << endl;
+    if (sexoDescubierto) {
 
-        cout << "Nombre: "
-             << s.getNombre()
-             << endl;
+        cout << culpableReal.getSexo();
 
-        cout << "Crimen: "
-             << s.getCrimen()
-             << endl;
+    } else {
 
-        cout << "Sexo: ";
-
-        if (sexoDescubierto) {
-
-            cout << s.getSexo();
-
-        } else {
-
-            cout << "?";
-        }
-
-        cout << endl;
-
-        cout << "Cabello: ";
-
-        if (cabelloDescubierto) {
-
-            cout << s.getCabello();
-
-        } else {
-
-            cout << "?";
-        }
-
-        cout << endl;
-
-        cout << "Piel: ";
-
-        if (pielDescubierta) {
-
-            cout << s.getPiel();
-
-        } else {
-
-            cout << "?";
-        }
-
-        cout << endl;
-
-        cout << "Estatura: ";
-
-        if (estaturaDescubierta) {
-
-            cout << s.getEstatura();
-
-        } else {
-
-            cout << "?";
-        }
-
-        cout << endl;
+        cout << "?";
     }
 
     cout << endl;
+
+    cout << "Cabello: ";
+
+    if (cabelloDescubierto) {
+
+        cout << culpableReal.getCabello();
+
+    } else {
+
+        cout << "?";
+    }
+
+    cout << endl;
+
+    cout << "Piel: ";
+
+    if (pielDescubierta) {
+
+        cout << culpableReal.getPiel();
+
+    } else {
+
+        cout << "?";
+    }
+
+    cout << endl;
+
+    cout << "Estatura: ";
+
+    if (estaturaDescubierta) {
+
+        cout << culpableReal.getEstatura();
+
+    } else {
+
+        cout << "?";
+    }
+
+    cout << endl << endl;
 }
 
 void Detective::setCulpable(
         Sospechoso sospechoso) {
 
-    culpableReal = sospechoso;
+    culpableReal =
+            sospechoso;
 }
 
-Sospechoso Detective::getCulpable() {
+Sospechoso Detective::getCulpable() const {
 
     return culpableReal;
 }
 
 int Detective::cantidadPistas() {
 
-    return pistas.size();
+    return 0;
 }
 
-bool Detective::acusar(string nombre) {
+bool Detective::acusar(
+        string nombre) {
 
     return nombre ==
            culpableReal.getNombre();

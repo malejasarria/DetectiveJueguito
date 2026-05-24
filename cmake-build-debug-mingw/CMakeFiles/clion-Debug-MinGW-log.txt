@@ -1,0 +1,4 @@
+"C:\Program Files\CMake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "MinGW Makefiles" -S C:\Users\usuario\CLionProjects\DetectiveJueguito -B C:\Users\usuario\CLionProjects\DetectiveJueguito\cmake-build-debug-mingw
+-- Configuring done (0.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: C:/Users/usuario/CLionProjects/DetectiveJueguito/cmake-build-debug-mingw

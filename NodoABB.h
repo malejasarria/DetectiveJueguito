@@ -1,19 +1,13 @@
 #ifndef NODOABB_H
 #define NODOABB_H
 
-#include "Score.h"
-
-#include <string>
-
-using namespace std;
+#include "score.h"
 
 class NodoABB {
 
 public:
 
     Score dato;
-
-    string nombreDetective;
 
     NodoABB* izquierda;
 

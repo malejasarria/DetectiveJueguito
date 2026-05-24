@@ -1,11 +1,16 @@
 #include "Testigo.h"
 
-Testigo::Testigo(string d) {
+Testigo::Testigo()
 
-    declaracion = d;
+    : declaracion("") {
 }
 
-string Testigo::getDeclaracion() {
+Testigo::Testigo(string d)
+
+    : declaracion(d) {
+}
+
+string Testigo::getDeclaracion() const {
 
     return declaracion;
 }

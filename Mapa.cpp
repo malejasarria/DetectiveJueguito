@@ -18,17 +18,16 @@ void Mapa::crearMapa() {
 
     Nodo* filaActualInicio = nullptr;
 
-    for (int i = 0; i < 9; i++) {
-
-        Nodo* actual = nullptr;
+    for (int i = 0; i < FILAS; i++) {
 
         Nodo* izquierda = nullptr;
 
         Nodo* arriba = filaAnteriorInicio;
 
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < COLUMNAS; j++) {
 
-            Nodo* nuevo = new Nodo(i, j);
+            Nodo* nuevo =
+                    new Nodo(i, j);
 
             if (j == 0) {
 
@@ -42,31 +41,44 @@ void Mapa::crearMapa() {
 
             if (izquierda != nullptr) {
 
-                izquierda->derecha = nuevo;
+                izquierda->derecha =
+                        nuevo;
 
-                nuevo->izquierda = izquierda;
+                nuevo->izquierda =
+                        izquierda;
             }
 
             if (arriba != nullptr) {
 
-                nuevo->arriba = arriba;
+                nuevo->arriba =
+                        arriba;
 
-                arriba->abajo = nuevo;
+                arriba->abajo =
+                        nuevo;
 
-                arriba = arriba->derecha;
+                arriba =
+                        arriba->derecha;
             }
 
             izquierda = nuevo;
-
-            actual = nuevo;
         }
 
-        filaAnteriorInicio = filaActualInicio;
+        filaAnteriorInicio =
+                filaActualInicio;
     }
+
+    generarPistas();
+
+    generarBloqueos();
+
+    generarTestigos();
+}
+
+void Mapa::generarPistas() {
 
     int pistas = 0;
 
-    while (pistas < 10) {
+    while (pistas < TOTAL_PISTAS) {
 
         Nodo* actual =
                 obtenerNodoAleatorio();
@@ -91,10 +103,13 @@ void Mapa::crearMapa() {
             pistas++;
         }
     }
+}
+
+void Mapa::generarBloqueos() {
 
     int bloqueos = 0;
 
-    while (bloqueos < 16) {
+    while (bloqueos < TOTAL_BLOQUEOS) {
 
         Nodo* actual =
                 obtenerNodoAleatorio();
@@ -110,10 +125,13 @@ void Mapa::crearMapa() {
             bloqueos++;
         }
     }
+}
+
+void Mapa::generarTestigos() {
 
     int testigos = 0;
 
-    while (testigos < 5) {
+    while (testigos < TOTAL_TESTIGOS) {
 
         Nodo* actual =
                 obtenerNodoAleatorio();
@@ -132,37 +150,47 @@ void Mapa::crearMapa() {
 }
 
 void Mapa::imprimirMapa(
-        Detective detective) {
+        Detective& detective) {
 
     Nodo* filaActual = inicio;
 
     cout << endl;
 
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < COLUMNAS + 2; i++) {
 
         cout << "# ";
     }
 
     cout << endl;
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < FILAS; i++) {
 
         cout << "# ";
 
         Nodo* columnaActual =
                 filaActual;
 
-        for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < COLUMNAS; j++) {
 
             if (columnaActual ==
                 detective.getPosicion()) {
 
                 cout << "D ";
 
+                columnaActual->descubierto =
+                        true;
+
             } else {
 
-                cout << columnaActual->contenido
-                     << " ";
+                if (!columnaActual->descubierto) {
+
+                    cout << "o ";
+
+                } else {
+
+                    cout << columnaActual->contenido
+                         << " ";
+                }
             }
 
             columnaActual =
@@ -175,7 +203,7 @@ void Mapa::imprimirMapa(
                 filaActual->abajo;
     }
 
-    for (int i = 0; i < 11; i++) {
+    for (int i = 0; i < COLUMNAS + 2; i++) {
 
         cout << "# ";
     }
@@ -193,10 +221,10 @@ Nodo* Mapa::obtenerNodoAleatorio() {
     Nodo* actual = inicio;
 
     int fila =
-            rand() % 9;
+            rand() % FILAS;
 
     int columna =
-            rand() % 9;
+            rand() % COLUMNAS;
 
     for (int i = 0; i < fila; i++) {
 
@@ -217,7 +245,10 @@ void Mapa::abrirCalles() {
 
     int abiertas = 0;
 
-    while (abiertas < 2) {
+    int intentos = 0;
+
+    while (abiertas < 2 &&
+           intentos < 100) {
 
         Nodo* actual =
                 obtenerNodoAleatorio();
@@ -228,10 +259,12 @@ void Mapa::abrirCalles() {
                     false;
 
             actual->contenido =
-                    'o';
+                    ' ';
 
             abiertas++;
         }
+
+        intentos++;
     }
 
     cout << endl;

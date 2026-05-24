@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/DetectiveJueguito.dir/ArbolABB.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/ArbolABB.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/ColaTestigos.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/ColaTestigos.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Detective.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Detective.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/HashSospechosos.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/HashSospechosos.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Juego.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Juego.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Mapa.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Mapa.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Nodo.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Nodo.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/NodoABB.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/NodoABB.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/NodoCola.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/NodoCola.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/NodoPista.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/NodoPista.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/PilaPistas.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/PilaPistas.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Sospechoso.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Sospechoso.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/Testigo.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/Testigo.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/main.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/main.cpp.obj.d"
+  "CMakeFiles/DetectiveJueguito.dir/score.cpp.obj"
+  "CMakeFiles/DetectiveJueguito.dir/score.cpp.obj.d"
+  "DetectiveJueguito.exe"
+  "DetectiveJueguito.exe.manifest"
+  "DetectiveJueguito.pdb"
+  "libDetectiveJueguito.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/DetectiveJueguito.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
