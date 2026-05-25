@@ -325,6 +325,80 @@ void Detective::interrogarTestigo() {
          << endl;
 
     testigos.dequeue();
+
+    cout << endl;
+
+    int atributo =
+            rand() % 4;
+
+    switch (atributo) {
+
+        case 0:
+
+            if (!cabelloDescubierto) {
+
+                cout << "El testigo revelo:"
+                     << endl;
+
+                cout << "Cabello del culpable: "
+                     << culpableReal.getCabello()
+                     << endl;
+
+                cabelloDescubierto = true;
+            }
+
+            break;
+
+        case 1:
+
+            if (!pielDescubierta) {
+
+                cout << "El testigo revelo:"
+                     << endl;
+
+                cout << "Color de piel del culpable: "
+                     << culpableReal.getPiel()
+                     << endl;
+
+                pielDescubierta = true;
+            }
+
+            break;
+
+        case 2:
+
+            if (!sexoDescubierto) {
+
+                cout << "El testigo revelo:"
+                     << endl;
+
+                cout << "Sexo del culpable: "
+                     << culpableReal.getSexo()
+                     << endl;
+
+                sexoDescubierto = true;
+            }
+
+            break;
+
+        case 3:
+
+            if (!estaturaDescubierta) {
+
+                cout << "El testigo revelo:"
+                     << endl;
+
+                cout << "Estatura del culpable: "
+                     << culpableReal.getEstatura()
+                     << endl;
+
+                estaturaDescubierta = true;
+            }
+
+            break;
+    }
+
+    cout << endl;
 }
 
 void Detective::agregarSospechoso(
