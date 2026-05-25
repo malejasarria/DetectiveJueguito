@@ -1,8 +1,13 @@
 #include "NodoPista.h"
 
-NodoPista::NodoPista(char tipo) {
+NodoPista::NodoPista(char t) {
 
-    tipoPista = tipo;
+    tipo = t;
 
     siguiente = nullptr;
+}
+
+char NodoPista::getTipo() {
+
+    return tipo;
 }

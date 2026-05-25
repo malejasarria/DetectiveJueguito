@@ -4,7 +4,6 @@
 #include "Mapa.h"
 #include "Detective.h"
 #include "ArbolABB.h"
-#include "HashSospechosos.h"
 
 class Juego {
 
@@ -16,24 +15,22 @@ private:
 
     ArbolABB ranking;
 
-    HashSospechosos sospechosos;
-
-    bool terminado;
-
     void inicializarSospechosos();
 
-    void generarCulpable();
+    void inicializarDetective();
 
-    void procesarMovimiento(
-            char opcion);
+    void inicializarRanking();
 
-    void revisarCasilla();
+    void mostrarMenu();
 
-    void mostrarControles();
+    void faseAcusacion();
 
 public:
 
     Juego(string nombreDetective);
+
+    void procesarMovimiento(
+            char movimiento);
 
     void iniciar();
 };

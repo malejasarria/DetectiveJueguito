@@ -13,16 +13,14 @@ private:
 
     static const int TAM = 20;
 
-    Sospechoso* tabla[TAM];
+    Sospechoso tabla[TAM];
+
+    int funcionHash(
+            string nombre);
 
 public:
 
     HashSospechosos();
-
-    ~HashSospechosos();
-
-    int funcionHash(
-            string nombre);
 
     void insertar(
             Sospechoso sospechoso);
@@ -31,6 +29,8 @@ public:
             string nombre);
 
     void mostrar();
+
+    Sospechoso* getTabla();
 };
 
 #endif

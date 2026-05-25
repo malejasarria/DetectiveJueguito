@@ -1,17 +1,25 @@
 cmake_minimum_required(VERSION 4.2)
+
 project(DetectiveJueguito)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(DetectiveJueguito main.cpp
+add_executable(DetectiveJueguito
+
+        main.cpp
 
         Nodo.cpp
         Mapa.cpp
         Detective.cpp
         Juego.cpp
 
+        Testigo.cpp
+        Sospechoso.cpp
+
         NodoABB.cpp
         ArbolABB.cpp
+
+        Score.cpp
 
         NodoPista.cpp
         PilaPistas.cpp
@@ -19,9 +27,5 @@ add_executable(DetectiveJueguito main.cpp
         NodoCola.cpp
         ColaTestigos.cpp
 
-        Sospechoso.cpp
-        Testigo.cpp
-
         HashSospechosos.cpp
-
-        score.cpp)
+)

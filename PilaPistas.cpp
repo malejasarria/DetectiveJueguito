@@ -9,12 +9,8 @@ PilaPistas::PilaPistas() {
     cima = nullptr;
 }
 
-bool PilaPistas::estaVacia() {
-
-    return cima == nullptr;
-}
-
-void PilaPistas::push(char tipo) {
+void PilaPistas::push(
+        char tipo) {
 
     NodoPista* nuevo =
             new NodoPista(tipo);
@@ -43,10 +39,15 @@ char PilaPistas::top() {
 
     if (!estaVacia()) {
 
-        return cima->tipoPista;
+        return cima->getTipo();
     }
 
-    return ' ';
+    return 'N';
+}
+
+bool PilaPistas::estaVacia() {
+
+    return cima == nullptr;
 }
 
 void PilaPistas::mostrar() {
@@ -54,14 +55,9 @@ void PilaPistas::mostrar() {
     NodoPista* actual =
             cima;
 
-    cout << endl;
-
-    cout << "Pistas recolectadas:"
-         << endl;
-
     while (actual != nullptr) {
 
-        cout << actual->tipoPista
+        cout << actual->getTipo()
              << endl;
 
         actual =

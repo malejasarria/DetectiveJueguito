@@ -1,212 +1,313 @@
 #include "Juego.h"
 
 #include <iostream>
-#include <cstdlib>
 #include <ctime>
+#include <cctype>
 
 using namespace std;
 
-Juego::Juego(
-        string nombreDetective)
-
-    : detective(nombreDetective) {
-
-    terminado = false;
+Juego::Juego(string nombreDetective)
+        : detective(nombreDetective) {
 
     srand(time(nullptr));
 
-    detective.setPosicion(
-            mapa.obtenerInicio());
-
     inicializarSospechosos();
 
-    generarCulpable();
+    inicializarDetective();
+
+    inicializarRanking();
 }
 
 void Juego::inicializarSospechosos() {
 
-    Sospechoso s1(
-            "Carlos",
-            "Robo",
-            "Hombre",
-            "Negro",
-            "Triguena",
-            "Alta");
+    Sospechoso lista[8] = {
 
-    Sospechoso s2(
-            "Laura",
-            "Fraude",
-            "Mujer",
-            "Rubio",
-            "Blanca",
-            "Baja");
+            Sospechoso(
+                    "Carlos",
+                    "Robo",
+                    "Masculino",
+                    "Negro",
+                    "Morena",
+                    "Alto"
+            ),
 
-    Sospechoso s3(
-            "Miguel",
-            "Secuestro",
-            "Hombre",
-            "Castano",
-            "Morena",
-            "Media");
+            Sospechoso(
+                    "Ana",
+                    "Fraude",
+                    "Femenino",
+                    "Rubio",
+                    "Blanca",
+                    "Baja"
+            ),
 
-    Sospechoso s4(
-            "Camila",
-            "Hackeo",
-            "Mujer",
-            "Negro",
-            "Blanca",
-            "Alta");
+            Sospechoso(
+                    "Miguel",
+                    "Asesinato",
+                    "Masculino",
+                    "Oscuro",
+                    "Triguena",
+                    "Mediano"
+            ),
 
-    Sospechoso s5(
-            "Pedro",
-            "Extorsion",
-            "Hombre",
-            "Pelirrojo",
-            "Triguena",
-            "Baja");
+            Sospechoso(
+                    "Laura",
+                    "Secuestro",
+                    "Femenino",
+                    "Castano",
+                    "Blanca",
+                    "Alta"
+            ),
 
-    Sospechoso s6(
-            "Sofia",
-            "Contrabando",
-            "Mujer",
-            "Castano",
-            "Morena",
-            "Media");
+            Sospechoso(
+                    "Pedro",
+                    "Extorsion",
+                    "Masculino",
+                    "Pelirrojo",
+                    "Morena",
+                    "Bajo"
+            ),
 
-    Sospechoso s7(
-            "Jorge",
-            "Estafa",
-            "Hombre",
-            "Rubio",
-            "Blanca",
-            "Alta");
+            Sospechoso(
+                    "Camila",
+                    "Hackeo",
+                    "Femenino",
+                    "Negro",
+                    "Triguena",
+                    "Mediana"
+            ),
 
-    Sospechoso s8(
-            "Ana",
-            "Lavado",
-            "Mujer",
-            "Negro",
-            "Triguena",
-            "Baja");
+            Sospechoso(
+                    "Jorge",
+                    "Estafa",
+                    "Masculino",
+                    "Canoso",
+                    "Blanca",
+                    "Alta"
+            ),
 
-    sospechosos.insertar(s1);
-    sospechosos.insertar(s2);
-    sospechosos.insertar(s3);
-    sospechosos.insertar(s4);
-    sospechosos.insertar(s5);
-    sospechosos.insertar(s6);
-    sospechosos.insertar(s7);
-    sospechosos.insertar(s8);
-
-    detective.agregarSospechoso(s1);
-    detective.agregarSospechoso(s2);
-    detective.agregarSospechoso(s3);
-    detective.agregarSospechoso(s4);
-    detective.agregarSospechoso(s5);
-    detective.agregarSospechoso(s6);
-    detective.agregarSospechoso(s7);
-    detective.agregarSospechoso(s8);
-}
-
-void Juego::generarCulpable() {
-
-    string nombres[8] = {
-            "Carlos",
-            "Laura",
-            "Miguel",
-            "Camila",
-            "Pedro",
-            "Sofia",
-            "Jorge",
-            "Ana"
+            Sospechoso(
+                    "Sofia",
+                    "Contrabando",
+                    "Femenino",
+                    "Oscuro",
+                    "Morena",
+                    "Baja"
+            )
     };
 
-    string nombreElegido =
-            nombres[rand() % 8];
+    for (int i = 0; i < 8; i++) {
 
-    Sospechoso* culpable =
-            sospechosos.buscar(
-                    nombreElegido);
-
-    if (culpable != nullptr) {
-
-        detective.setCulpable(
-                *culpable);
+        detective.agregarSospechoso(
+                lista[i]);
     }
+
+    int culpable =
+            rand() % 8;
+
+    detective.setCulpable(
+            lista[culpable]);
 }
 
-void Juego::mostrarControles() {
+void Juego::inicializarDetective() {
+
+    Nodo* inicio =
+            mapa.obtenerNodoAleatorio();
+
+    while (inicio->bloqueado ||
+           inicio->tienePista ||
+           inicio->tieneTestigo) {
+
+        inicio =
+                mapa.obtenerNodoAleatorio();
+    }
+
+    detective.setPosicion(
+            inicio);
+}
+
+void Juego::inicializarRanking() {
+
+    ranking.insertar(
+            Score("Laura", 24));
+
+    ranking.insertar(
+            Score("Pedro", 35));
+
+    ranking.insertar(
+            Score("Camila", 19));
+}
+
+void Juego::mostrarMenu() {
+
+    cout << endl;
+
+    cout << detective.getNombre()
+         << ", tu puntaje actual es: "
+         << detective.getPuntaje()
+         << endl;
+
+    mapa.imprimirMapa(detective);
 
     cout << endl;
 
     cout << "W = Arriba" << endl;
-
     cout << "S = Abajo" << endl;
-
     cout << "A = Izquierda" << endl;
-
     cout << "D = Derecha" << endl;
-
     cout << "T = Ver pistas" << endl;
-
-    cout << "X = Usar ultima pista"
-         << endl;
-
-    cout << "I = Interrogar testigo"
-         << endl;
-
-    cout << "M = Mostrar sospechosos"
-         << endl;
-
-    cout << "B = Mostrar ranking"
-         << endl;
-
-    cout << "Q = Salir"
-         << endl;
+    cout << "X = Usar ultima pista" << endl;
+    cout << "I = Interrogar testigo" << endl;
+    cout << "M = Mostrar sospechosos" << endl;
+    cout << "B = Mostrar ranking" << endl;
+    cout << "F = Buscar detective" << endl;
+    cout << "Q = Salir" << endl;
 }
 
 void Juego::procesarMovimiento(
-        char opcion) {
+        char movimiento) {
 
-    switch (opcion) {
+    switch (movimiento) {
 
-        case 'w':
+        case 'W':
 
             detective.moverArriba();
 
             break;
 
-        case 's':
+        case 'S':
 
             detective.moverAbajo();
 
             break;
 
-        case 'a':
+        case 'A':
 
             detective.moverIzquierda();
 
             break;
 
-        case 'd':
+        case 'D':
 
             detective.moverDerecha();
 
             break;
+
+        case 'T':
+
+            detective.mostrarPistas();
+
+            break;
+
+        case 'I':
+
+            detective.interrogarTestigo();
+
+            break;
+
+        case 'M':
+
+            detective.mostrarSospechosos();
+
+            break;
+
+        case 'B':
+
+            ranking.mostrarInorder();
+
+            break;
+
+        case 'F': {
+
+            string nombre;
+
+            cout << endl;
+
+            cout << "Nombre del detective: ";
+
+            cin >> nombre;
+
+            ranking.buscarDetective(
+                    nombre);
+
+            break;
+        }
+
+        case 'X': {
+
+            char usada =
+                    detective.usarPista();
+
+            if (usada == 'P') {
+
+                Nodo* nueva =
+                        mapa.obtenerNodoAleatorio();
+
+                while (nueva->bloqueado ||
+                       nueva->tienePista ||
+                       nueva->tieneTestigo) {
+
+                    nueva =
+                            mapa.obtenerNodoAleatorio();
+                }
+
+                detective.setPosicion(
+                        nueva);
+
+                cout << endl;
+
+                cout << "Fuiste teletransportado."
+                     << endl;
+            }
+
+            if (usada == 'C') {
+
+                mapa.abrirCalles();
+            }
+
+            if (usada != 'N') {
+
+                Nodo* nuevaPista =
+                        mapa.obtenerNodoAleatorio();
+
+                while (nuevaPista->bloqueado ||
+                       nuevaPista->tienePista ||
+                       nuevaPista->tieneTestigo) {
+
+                    nuevaPista =
+                            mapa.obtenerNodoAleatorio();
+                }
+
+                char tipos[4] =
+                        {'H', 'C', 'T', 'P'};
+
+                char nueva =
+                        tipos[rand() % 4];
+
+                nuevaPista->tienePista =
+                        true;
+
+                nuevaPista->tipoPista =
+                        nueva;
+
+                nuevaPista->contenido =
+                        nueva;
+
+                cout << endl;
+
+                cout << "La pista regreso al mapa."
+                     << endl;
+            }
+
+            break;
+        }
     }
-}
-
-void Juego::revisarCasilla() {
-
-    Nodo* actual =
-            detective.getPosicion();
 
     detective.revisarPista();
 
-    if (actual->tieneTestigo) {
+    if (detective.getPosicion()->tieneTestigo) {
 
         Testigo nuevo(
-                "Vi al sospechoso cerca del crimen.");
+                "Vi algo sospechoso cerca del callejon.");
 
         detective.agregarTestigo(
                 nuevo);
@@ -216,97 +317,111 @@ void Juego::revisarCasilla() {
         cout << "Has encontrado un testigo."
              << endl;
 
-        actual->tieneTestigo =
+        detective.getPosicion()->tieneTestigo =
                 false;
 
-        actual->contenido =
+        detective.getPosicion()->contenido =
                 'o';
     }
+}
+
+void Juego::faseAcusacion() {
+
+    cout << endl;
+
+    cout << "================================="
+         << endl;
+
+    cout << "HAS RECOLECTADO 10 PISTAS"
+         << endl;
+
+    cout << "ES MOMENTO DE ACUSAR"
+         << endl;
+
+    cout << "================================="
+         << endl;
+
+    detective.mostrarSospechosos();
+
+    string acusacion;
+
+    cout << endl;
+
+    cout << "A quien acusas?: ";
+
+    cin >> acusacion;
+
+    if (detective.acusar(acusacion)) {
+
+        cout << endl;
+
+        cout << "CASO RESUELTO!"
+             << endl;
+
+        cout << acusacion
+             << " era el culpable."
+             << endl;
+
+        ranking.insertar(
+                Score(
+                        detective.getNombre(),
+                        detective.getPuntaje()));
+
+        cout << endl;
+
+        cout << "Tu score fue agregado al ranking."
+             << endl;
+
+    } else {
+
+        cout << endl;
+
+        cout << "ACUSACION INCORRECTA."
+             << endl;
+
+        detective.setPuntaje(
+                detective.getPuntaje() * 2);
+
+        cout << "Tu puntaje fue duplicado."
+             << endl;
+
+        cout << "Puntaje final: "
+             << detective.getPuntaje()
+             << endl;
+
+        cout << "El verdadero culpable era "
+             << detective.getCulpable().getNombre()
+             << endl;
+    }
+
+    cout << endl;
+
+    ranking.mostrarInorder();
 }
 
 void Juego::iniciar() {
 
     char opcion;
 
-    while (!terminado) {
+    do {
 
-        cout << endl;
-
-        cout << detective.getNombre()
-             << ", tu puntaje actual es: "
-             << detective.getPuntaje()
-             << endl;
-
-        mapa.imprimirMapa(
-                detective);
-
-        mostrarControles();
+        mostrarMenu();
 
         cin >> opcion;
 
-        procesarMovimiento(opcion);
+        opcion =
+                toupper(opcion);
 
-        revisarCasilla();
+        procesarMovimiento(
+                opcion);
 
-        switch (opcion) {
+        if (detective.cantidadPistas()
+            >= 10) {
 
-            case 't':
+            faseAcusacion();
 
-                detective.mostrarPistas();
-
-                break;
-
-            case 'x': {
-
-                char usada =
-                        detective.usarPista();
-
-                if (usada == 'P') {
-
-                    mapa.abrirCalles();
-                }
-
-                break;
-            }
-
-            case 'i':
-
-                detective.interrogarTestigo();
-
-                break;
-
-            case 'm':
-
-                detective.mostrarSospechosos();
-
-                break;
-
-            case 'b':
-
-                ranking.mostrarInorder();
-
-                break;
-
-            case 'q':
-
-                terminado = true;
-
-                break;
+            break;
         }
-    }
 
-    Score resultado(
-            detective.getNombre(),
-            detective.getPuntaje());
-
-    ranking.insertar(resultado);
-
-    cout << endl;
-
-    cout << "Juego terminado."
-         << endl;
-
-    cout << "Puntaje final: "
-         << detective.getPuntaje()
-         << endl;
+    } while (opcion != 'Q');
 }

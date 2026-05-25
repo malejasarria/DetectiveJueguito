@@ -177,20 +177,10 @@ void Mapa::imprimirMapa(
 
                 cout << "D ";
 
-                columnaActual->descubierto =
-                        true;
-
             } else {
 
-                if (!columnaActual->descubierto) {
-
-                    cout << "o ";
-
-                } else {
-
-                    cout << columnaActual->contenido
-                         << " ";
-                }
+                cout << columnaActual->contenido
+                     << " ";
             }
 
             columnaActual =
@@ -259,7 +249,7 @@ void Mapa::abrirCalles() {
                     false;
 
             actual->contenido =
-                    ' ';
+                    'o';
 
             abiertas++;
         }

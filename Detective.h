@@ -24,6 +24,8 @@ private:
 
     PilaPistas pistas;
 
+    int totalPistas;
+
     ColaTestigos testigos;
 
     HashSospechosos sospechosos;

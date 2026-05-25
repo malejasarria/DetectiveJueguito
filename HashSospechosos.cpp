@@ -8,20 +8,8 @@ HashSospechosos::HashSospechosos() {
 
     for (int i = 0; i < TAM; i++) {
 
-        tabla[i] = nullptr;
-    }
-}
-
-HashSospechosos::~HashSospechosos() {
-
-    for (int i = 0; i < TAM; i++) {
-
-        if (tabla[i] != nullptr) {
-
-            delete tabla[i];
-
-            tabla[i] = nullptr;
-        }
+        tabla[i] =
+                Sospechoso();
     }
 }
 
@@ -45,26 +33,15 @@ void HashSospechosos::insertar(
             funcionHash(
                     sospechoso.getNombre());
 
-    int inicio = indice;
-
-    while (tabla[indice] != nullptr) {
+    while (tabla[indice].getNombre()
+           != "") {
 
         indice =
                 (indice + 1) % TAM;
-
-        if (indice == inicio) {
-
-            cout << endl;
-
-            cout << "La tabla hash esta llena."
-                 << endl;
-
-            return;
-        }
-    }
+           }
 
     tabla[indice] =
-            new Sospechoso(sospechoso);
+            sospechoso;
 }
 
 Sospechoso* HashSospechosos::buscar(
@@ -73,14 +50,16 @@ Sospechoso* HashSospechosos::buscar(
     int indice =
             funcionHash(nombre);
 
-    int inicio = indice;
+    int inicio =
+            indice;
 
-    while (tabla[indice] != nullptr) {
+    while (tabla[indice].getNombre()
+           != "") {
 
-        if (tabla[indice]->getNombre()
+        if (tabla[indice].getNombre()
             == nombre) {
 
-            return tabla[indice];
+            return &tabla[indice];
             }
 
         indice =
@@ -90,7 +69,7 @@ Sospechoso* HashSospechosos::buscar(
 
             break;
         }
-    }
+           }
 
     return nullptr;
 }
@@ -104,19 +83,20 @@ void HashSospechosos::mostrar() {
 
     for (int i = 0; i < TAM; i++) {
 
-        cout << i << " -> ";
+        if (tabla[i].getNombre()
+            != "") {
 
-        if (tabla[i] != nullptr) {
-
-            cout << tabla[i]->getNombre();
-
-        } else {
-
-            cout << "vacio";
-        }
-
-        cout << endl;
+            cout << i
+                 << " -> "
+                 << tabla[i].getNombre()
+                 << endl;
+            }
     }
 
     cout << endl;
+}
+
+Sospechoso* HashSospechosos::getTabla() {
+
+    return tabla;
 }

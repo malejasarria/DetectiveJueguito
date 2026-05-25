@@ -3,13 +3,17 @@
 
 class NodoPista {
 
-public:
+private:
 
-    char tipoPista;
+    char tipo;
+
+public:
 
     NodoPista* siguiente;
 
-    NodoPista(char tipo);
+    NodoPista(char t);
+
+    char getTipo();
 };
 
 #endif
