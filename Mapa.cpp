@@ -202,36 +202,20 @@ void Mapa::imprimirMapa(
 
                 columnaActual->descubierto =
                         true;
+            }
 
-            } else {
+            else {
 
                 if (columnaActual->bloqueado) {
 
                     cout << "| ";
-
-                }
-
-                else if (
-                        columnaActual->tienePista) {
-
-                    cout << columnaActual->tipoPista
-                         << " ";
-                }
-
-                else if (
-                        columnaActual->tieneTestigo) {
-
-                    cout << "W ";
-                }
-
-                else if (
-                        columnaActual->descubierto) {
-
-                    cout << columnaActual->contenido
-                         << " ";
                 }
 
                 else {
+
+                    /*
+                     Pistas y testigos ocultos
+                    */
 
                     cout << "o ";
                 }
