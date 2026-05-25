@@ -13,10 +13,11 @@ private:
 
 public:
 
+    Testigo();
+
     Testigo(string d);
 
-    string getDeclaracion();
-
+    string getDeclaracion() const;
 };
 
 #endif

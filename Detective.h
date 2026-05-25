@@ -2,14 +2,13 @@
 #define DETECTIVE_H
 
 #include "Nodo.h"
-#include "Pista.h"
+#include "PilaPistas.h"
+#include "ColaTestigos.h"
+#include "HashSospechosos.h"
 #include "Testigo.h"
 #include "Sospechoso.h"
 
 #include <string>
-#include <stack>
-#include <queue>
-#include <unordered_map>
 
 using namespace std;
 
@@ -23,11 +22,11 @@ private:
 
     Nodo* posicionActual;
 
-    stack<Pista> pistas;
+    PilaPistas pistas;
 
-    queue<Testigo> testigos;
+    ColaTestigos testigos;
 
-    unordered_map<string, Sospechoso> sospechosos;
+    HashSospechosos sospechosos;
 
     Sospechoso culpableReal;
 
@@ -43,17 +42,19 @@ public:
 
     Detective(string nom);
 
-    void setPosicion(Nodo* nodo);
+    void setPosicion(
+            Nodo* nodo);
 
     Nodo* getPosicion();
 
-    string getNombre();
+    string getNombre() const;
 
-    int getPuntaje();
+    int getPuntaje() const;
 
     void aumentarPuntaje();
 
-    void setPuntaje(int p);
+    void setPuntaje(
+            int p);
 
     void moverArriba();
 
@@ -63,7 +64,8 @@ public:
 
     void moverDerecha();
 
-    void agregarPista(Pista pista);
+    void agregarPista(
+            char tipo);
 
     void mostrarPistas();
 
@@ -71,21 +73,25 @@ public:
 
     char usarPista();
 
-    void agregarTestigo(Testigo testigo);
+    void agregarTestigo(
+            Testigo testigo);
 
     void interrogarTestigo();
 
-    void agregarSospechoso(Sospechoso sospechoso);
+    void agregarSospechoso(
+            Sospechoso sospechoso);
 
     void mostrarSospechosos();
 
-    void setCulpable(Sospechoso sospechoso);
+    void setCulpable(
+            Sospechoso sospechoso);
 
-    Sospechoso getCulpable();
+    Sospechoso getCulpable() const;
 
     int cantidadPistas();
 
-    bool acusar(string nombre);
+    bool acusar(
+            string nombre);
 };
 
 #endif

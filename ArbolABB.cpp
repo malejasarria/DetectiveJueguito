@@ -18,8 +18,8 @@ NodoABB* ArbolABB::insertarRec(
         return nuevo;
     }
 
-    if (nuevo->nombreDetective ==
-        raiz->nombreDetective) {
+    if (nuevo->dato.getNombre() ==
+        raiz->dato.getNombre()) {
 
         if (nuevo->dato.getPuntos() <
             raiz->dato.getPuntos()) {
@@ -65,7 +65,8 @@ void ArbolABB::mostrarRec(
 
     if (raiz != nullptr) {
 
-        mostrarRec(raiz->izquierda);
+        mostrarRec(
+                raiz->izquierda);
 
         cout << raiz->dato.getNombre()
              << " -> "
@@ -73,7 +74,8 @@ void ArbolABB::mostrarRec(
              << " puntos"
              << endl;
 
-        mostrarRec(raiz->derecha);
+        mostrarRec(
+                raiz->derecha);
     }
 }
 
@@ -89,47 +91,55 @@ void ArbolABB::mostrarInorder() {
     cout << endl;
 }
 
+bool ArbolABB::buscarRec(
+        NodoABB* raiz,
+        string nombre) {
+
+    if (raiz == nullptr) {
+
+        return false;
+    }
+
+    if (raiz->dato.getNombre()
+        == nombre) {
+
+        cout << endl;
+
+        cout << nombre
+             << " ya jugo."
+             << endl;
+
+        cout << "Mejor score: "
+             << raiz->dato.getPuntos()
+             << endl;
+
+        return true;
+    }
+
+    return buscarRec(
+                   raiz->izquierda,
+                   nombre)
+           ||
+           buscarRec(
+                   raiz->derecha,
+                   nombre);
+}
+
 bool ArbolABB::buscarDetective(
         string nombre) {
 
-    NodoABB* actual = raiz;
+    if (!buscarRec(
+            raiz,
+            nombre)) {
 
-    while (actual != nullptr) {
+        cout << endl;
 
-        if (actual->dato.getNombre()
-            == nombre) {
+        cout << nombre
+             << " no tiene registros."
+             << endl;
 
-            cout << endl;
-
-            cout << nombre
-                 << " ya jugo."
-                 << endl;
-
-            cout << "Mejor score: "
-                 << actual->dato.getPuntos()
-                 << endl;
-
-            return true;
-        }
-
-        if (nombre <
-            actual->dato.getNombre()) {
-
-            actual =
-                    actual->izquierda;
-
-        } else {
-
-            actual =
-                    actual->derecha;
-        }
+        return false;
     }
 
-    cout << endl;
-
-    cout << nombre
-         << " no tiene registros."
-         << endl;
-
-    return false;
+    return true;
 }

@@ -1,13 +1,13 @@
 #include "Sospechoso.h"
 
-Sospechoso::Sospechoso() {
+Sospechoso::Sospechoso()
 
-    nombre = "";
-    crimen = "";
-    sexo = "";
-    cabello = "";
-    piel = "";
-    estatura = "";
+    : nombre(""),
+      crimen(""),
+      sexo(""),
+      cabello(""),
+      piel(""),
+      estatura("") {
 }
 
 Sospechoso::Sospechoso(
@@ -16,47 +16,42 @@ Sospechoso::Sospechoso(
         string s,
         string cab,
         string p,
-        string e) {
+        string e)
 
-    nombre = n;
-
-    crimen = c;
-
-    sexo = s;
-
-    cabello = cab;
-
-    piel = p;
-
-    estatura = e;
+    : nombre(n),
+      crimen(c),
+      sexo(s),
+      cabello(cab),
+      piel(p),
+      estatura(e) {
 }
 
-string Sospechoso::getNombre() {
+string Sospechoso::getNombre() const {
 
     return nombre;
 }
 
-string Sospechoso::getCrimen() {
+string Sospechoso::getCrimen() const {
 
     return crimen;
 }
 
-string Sospechoso::getSexo() {
+string Sospechoso::getSexo() const {
 
     return sexo;
 }
 
-string Sospechoso::getCabello() {
+string Sospechoso::getCabello() const {
 
     return cabello;
 }
 
-string Sospechoso::getPiel() {
+string Sospechoso::getPiel() const {
 
     return piel;
 }
 
-string Sospechoso::getEstatura() {
+string Sospechoso::getEstatura() const {
 
     return estatura;
 }

@@ -33,17 +33,17 @@ public:
             string p,
             string e);
 
-    string getNombre();
+    string getNombre() const;
 
-    string getCrimen();
+    string getCrimen() const;
 
-    string getSexo();
+    string getSexo() const;
 
-    string getCabello();
+    string getCabello() const;
 
-    string getPiel();
+    string getPiel() const;
 
-    string getEstatura();
+    string getEstatura() const;
 };
 
 #endif

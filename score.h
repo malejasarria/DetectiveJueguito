@@ -19,9 +19,17 @@ public:
 
     Score(string nombre, int pts);
 
-    string getNombre();
+    string getNombre() const;
 
-    int getPuntos();
+    int getPuntos() const;
+
+    void setNombre(string nombre);
+
+    void setPuntos(int pts);
+
+    bool operator<(const Score& otro) const;
+
+    bool operator>(const Score& otro) const;
 };
 
 #endif

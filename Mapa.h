@@ -10,6 +10,19 @@ private:
 
     Nodo* inicio;
 
+    static const int FILAS = 9;
+    static const int COLUMNAS = 9;
+
+    static const int TOTAL_PISTAS = 10;
+    static const int TOTAL_BLOQUEOS = 16;
+    static const int TOTAL_TESTIGOS = 5;
+
+    void generarPistas();
+
+    void generarBloqueos();
+
+    void generarTestigos();
+
 public:
 
     Mapa();
@@ -17,7 +30,7 @@ public:
     void crearMapa();
 
     void imprimirMapa(
-            Detective detective);
+            Detective& detective);
 
     Nodo* obtenerInicio();
 

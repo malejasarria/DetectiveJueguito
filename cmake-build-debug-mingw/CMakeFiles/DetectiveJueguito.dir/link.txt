@@ -1,0 +1,3 @@
+"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\DetectiveJueguito.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\DetectiveJueguito.dir/objects.a @CMakeFiles\DetectiveJueguito.dir\objects1.rsp
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\DetectiveJueguito.dir/objects.a -Wl,--no-whole-archive -o DetectiveJueguito.exe -Wl,--out-implib,libDetectiveJueguito.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\DetectiveJueguito.dir\linkLibs.rsp
