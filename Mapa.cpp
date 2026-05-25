@@ -85,20 +85,43 @@ void Mapa::generarPistas() {
 
         if (actual->contenido == 'o') {
 
-            char tipos[4] =
-                    {'H', 'C', 'T', 'P'};
-
-            char tipo =
-                    tipos[rand() % 4];
-
-            actual->contenido =
-                    tipo;
-
             actual->tienePista =
                     true;
 
-            actual->tipoPista =
-                    tipo;
+            /*
+             H = Huella
+             C = Coartada
+             T = Testimonio
+             P = Prueba Forense
+            */
+
+            if (pistas == 0 ||
+                pistas == 4 ||
+                pistas == 8) {
+
+                actual->tipoPista = 'H';
+            }
+
+            else if (pistas == 1 ||
+                     pistas == 5) {
+
+                actual->tipoPista = 'C';
+            }
+
+            else if (pistas == 2 ||
+                     pistas == 6 ||
+                     pistas == 9) {
+
+                actual->tipoPista = 'T';
+            }
+
+            else {
+
+                actual->tipoPista = 'P';
+            }
+
+            actual->contenido =
+                    actual->tipoPista;
 
             pistas++;
         }
@@ -177,17 +200,49 @@ void Mapa::imprimirMapa(
 
                 cout << "D ";
 
+                columnaActual->descubierto =
+                        true;
+
             } else {
 
-                cout << columnaActual->contenido
-                     << " ";
+                if (columnaActual->bloqueado) {
+
+                    cout << "| ";
+
+                }
+
+                else if (
+                        columnaActual->tienePista) {
+
+                    cout << columnaActual->tipoPista
+                         << " ";
+                }
+
+                else if (
+                        columnaActual->tieneTestigo) {
+
+                    cout << "W ";
+                }
+
+                else if (
+                        columnaActual->descubierto) {
+
+                    cout << columnaActual->contenido
+                         << " ";
+                }
+
+                else {
+
+                    cout << "o ";
+                }
             }
 
             columnaActual =
                     columnaActual->derecha;
         }
 
-        cout << "#" << endl;
+        cout << "#"
+             << endl;
 
         filaActual =
                 filaActual->abajo;
